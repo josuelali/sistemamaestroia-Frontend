@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/generate",
+      "destination": "https://systema-maestro-backend.onrender.com/generate"
+    }
+  ]
+}
