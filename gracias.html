@@ -96,6 +96,12 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js');
 }
 </script>
+<script>
+  gtag('event', 'purchase_confirmed', {
+    currency: 'EUR',
+    value: 29
+  });
+</script>
 
 </body>
 </html>
