@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css" />
 
-<!-- FAVICON CORREGIDO -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="shortcut icon" href="/favicon.ico">
 
@@ -20,7 +19,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VH04"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -31,56 +29,87 @@ gtag('config', 'G-3CT444VH04');
 
 </head>
 
-<body>
+<body style="margin:0;font-family:Inter, sans-serif;background:#060B1A;color:white;">
 
 <!-- HERO -->
-<section class="hero">
-<div class="hero-overlay"></div>
-<div class="container hero-content">
-<h1>Sistema Maestro IA</h1>
-<p>Crea y orquesta asistentes IA con arquitectura jerárquica profesional.</p>
-<a href="/demo.html" class="btn-primary">Probar Demo</a>
+<section class="hero" style="position:relative;padding:120px 20px;text-align:center;background:url('hero-image.png') center/cover no-repeat;">
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.6);"></div>
+
+<div style="position:relative;z-index:2;max-width:900px;margin:auto;">
+<h1 style="font-size:48px;margin-bottom:20px;">Sistema Maestro IA</h1>
+<p style="font-size:20px;margin-bottom:30px;">
+Crea y orquesta asistentes IA con arquitectura jerárquica profesional.
+</p>
+
+<div>
+<a href="https://sistemamaestroia.com/pro"
+   style="padding:14px 28px;
+   background:#22c55e;
+   color:white;
+   border-radius:8px;
+   text-decoration:none;
+   font-weight:bold;
+   font-size:18px;">
+   🚀 Activar Plan PRO
+</a>
+
+<a href="/demo.html"
+   style="margin-left:15px;
+   padding:12px 24px;
+   background:#38bdf8;
+   color:#060B1A;
+   border-radius:8px;
+   text-decoration:none;
+   font-weight:bold;">
+   Probar Demo
+</a>
+
+<button id="installBtn"
+   style="display:none;
+   margin-left:15px;
+   padding:12px 22px;
+   background:#6366f1;
+   color:white;
+   border:none;
+   border-radius:8px;
+   cursor:pointer;">
+   Instalar aplicación
+</button>
+
+</div>
 </div>
 </section>
 
-<!-- CONTENIDO PRINCIPAL -->
-<section class="container" style="padding:60px 20px;">
-<h2>Orquesta asistentes con control total</h2>
-<p>Versionado, logs completos, rollback y ejecución controlada.</p>
+<!-- CONTENIDO -->
+<section style="padding:80px 20px;text-align:center;">
+<h2 style="font-size:32px;margin-bottom:20px;">
+Orquesta asistentes con control total
+</h2>
+<p style="font-size:18px;opacity:0.9;">
+Versionado, logs completos, rollback y ejecución controlada.
+</p>
 </section>
 
-<!-- FOOTER -->
-<footer style="text-align:center;padding:40px 20px;">
-<p>© 2026 SistemaMaestroIA</p>
+<footer style="text-align:center;padding:40px 20px;opacity:0.6;">
+© 2026 SistemaMaestroIA
 </footer>
 
-<!-- PWA INSTALL SCRIPT CORRECTAMENTE COLOCADO -->
 <script>
 let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
 
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
+  installBtn.style.display = "inline-block";
+});
 
-  const installBtn = document.createElement('button');
-  installBtn.innerText = "Instalar aplicación";
-  installBtn.style.padding = "12px 24px";
-  installBtn.style.marginTop = "30px";
-  installBtn.style.background = "#38bdf8";
-  installBtn.style.color = "#060B1A";
-  installBtn.style.border = "none";
-  installBtn.style.borderRadius = "8px";
-  installBtn.style.fontWeight = "bold";
-  installBtn.style.cursor = "pointer";
-
-  document.body.appendChild(installBtn);
-
-  installBtn.addEventListener('click', () => {
+installBtn.addEventListener('click', () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(() => {
+    deferredPrompt = null;
     installBtn.style.display = "none";
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(() => {
-      deferredPrompt = null;
-    });
   });
 });
 </script>
