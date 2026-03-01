@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Sistema Maestro IA — Orquesta asistentes IA con versionado, logs y rollback. 3 ejecuciones gratis." />
-  <title>Sistema Maestro IA</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Sistema Maestro IA – Orquesta asistentes IA con versionado, logs y rollback. 3 ejecuciones gratis." />
+<title>Sistema Maestro IA</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css" />
+
+<!-- FAVICON CORREGIDO -->
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="shortcut icon" href="/favicon.ico">
+
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#060B1A">
 
@@ -17,101 +20,69 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VH04"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3CT444VHQ4');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-3CT444VH04');
 </script>
 
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-overlay"></div>
-    <div class="container hero-content">
-      <h1>Orquesta asistentes IA como un sistema profesional.</h1>
-      <p class="subtitle">
-        Crea, versiona y ejecuta asistentes virtuales con control total,
-        logs completos y rollback real.
-      </p>
+<!-- HERO -->
+<section class="hero">
+<div class="hero-overlay"></div>
+<div class="container hero-content">
+<h1>Sistema Maestro IA</h1>
+<p>Crea y orquesta asistentes IA con arquitectura jerárquica profesional.</p>
+<a href="/demo.html" class="btn-primary">Probar Demo</a>
+</div>
+</section>
 
-      <div class="hero-buttons">
-        <a href="demo.html" class="btn btn-primary">Empieza Gratis</a>
-        <!-- Ponga aquí su enlace real de Stripe -->
-        <a href="https://buy.stripe.com/cNiaEX0kL4wJbY7cWrabK00" 
-   class="btn btn-primary btn--lg" 
-   target="_blank" 
-   rel="noopener">
-   Activar Plan Pro
-</a>
-      </div>
+<!-- CONTENIDO PRINCIPAL -->
+<section class="container" style="padding:60px 20px;">
+<h2>Orquesta asistentes con control total</h2>
+<p>Versionado, logs completos, rollback y ejecución controlada.</p>
+</section>
 
-      <p class="micro-trust">
-        Sin tarjeta · 3 ejecuciones gratuitas · Cancela cuando quieras
-      </p>
-    </div>
-  </section>
+<!-- FOOTER -->
+<footer style="text-align:center;padding:40px 20px;">
+<p>© 2026 SistemaMaestroIA</p>
+</footer>
 
-  <!-- GENERADOR -->
-  <section class="generator">
-    <div class="container">
-      <h2>Generador IA de Webs Monetizables</h2>
-      <p>Genera estructura HTML lista para monetizar con AdSense o afiliados.</p>
-
-      <textarea placeholder="Ejemplo: Landing page para SaaS de SEO orientado a afiliados..."></textarea>
-      <button class="btn btn-primary small">Generar Web</button>
-    </div>
-  </section>
-
-  <!-- PRICING (NUEVA SECCIÓN INDEPENDIENTE) -->
-  <section class="pricing">
-    <div class="container">
-      <h2 class="pricing-title">Plan Profesional</h2>
-      <p class="pricing-sub">Infraestructura real para proyectos reales.</p>
-
-      <div class="pricing-card featured">
-        <div class="badge">Más elegido</div>
-        <h3>PLAN PRO</h3>
-        <p class="price">29€<span>/mes</span></p>
-
-        <ul>
-          <li>✔ Ejecuciones ilimitadas*</li>
-          <li>✔ Versionado</li>
-          <li>✔ Publish / Rollback</li>
-          <li>✔ Logs completos</li>
-          <li>✔ Prioridad de ejecución</li>
-        </ul>
-
-        <a href="https://buy.stripe.com/cNiaEX0kL4wJbY7cWrabK00" 
-   class="btn btn-primary btn--lg" 
-   target="_blank" 
-   rel="noopener">
-   Activar Plan Pro
-</a>
-
-        <p class="pricing-trust">
-          Facturación simple · Cancela cuando quieras
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © <span id="year"></span> Sistema Maestro IA
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+<!-- PWA INSTALL SCRIPT CORRECTAMENTE COLOCADO -->
 <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  const installBtn = document.createElement('button');
+  installBtn.innerText = "Instalar aplicación";
+  installBtn.style.padding = "12px 24px";
+  installBtn.style.marginTop = "30px";
+  installBtn.style.background = "#38bdf8";
+  installBtn.style.color = "#060B1A";
+  installBtn.style.border = "none";
+  installBtn.style.borderRadius = "8px";
+  installBtn.style.fontWeight = "bold";
+  installBtn.style.cursor = "pointer";
+
+  document.body.appendChild(installBtn);
+
+  installBtn.addEventListener('click', () => {
+    installBtn.style.display = "none";
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => {
+      deferredPrompt = null;
+    });
+  });
+});
 </script>
 
 </body>
