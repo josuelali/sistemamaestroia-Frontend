@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Demo — SISTEMA MAESTRO IA</title>
-<link rel="icon" href="/favicon.ico/" sizes="any">
-<link rel="manifest" href="/manifest.webmanifest/">
-<meta name="theme-color" content="#060B1A">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#060B1A">
 
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="description" content="Demo pública de SISTEMA MAESTRO IA. Genera HTML con vista previa y código separado. Límite 3 usos." />
 
   <style>
@@ -197,15 +197,14 @@
     }
   </style>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3CT444VHQ4');
-</script>
-
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3CT444VHQ4');
+  </script>
 </head>
 
 <body>
@@ -219,7 +218,6 @@
     </div>
 
     <div class="grid">
-      <!-- LEFT: Controls -->
       <div class="card">
         <h2>Generador</h2>
         <div class="body">
@@ -229,7 +227,7 @@
           </div>
 
           <div class="row">
-            <button class="btn primary" id="btnGenerate">Generar contenido</button>
+            <button class="btn primary" id="btnGenerate" type="button">Generar contenido</button>
             <button class="btn ghost" id="btnReset" type="button">Reset</button>
           </div>
 
@@ -239,15 +237,13 @@
           </div>
 
           <p class="hint">
-            El resultado se interpreta como HTML cuando es posible (vista previa). El código se separa en pestañas (HTML/CSS/JS) y se puede copiar.
+            El resultado se interpreta como HTML cuando es posible. El código se separa en pestañas (HTML/CSS/JS) y se puede copiar.
           </p>
         </div>
       </div>
 
-      <!-- RIGHT: Output -->
       <div class="panes">
         <div class="split">
-          <!-- Preview -->
           <div class="card">
             <div class="subhead">
               <div class="title">Vista previa</div>
@@ -258,7 +254,6 @@
             <iframe class="frame" id="previewFrame" title="Vista previa"></iframe>
           </div>
 
-          <!-- Code -->
           <div class="card">
             <div class="subhead">
               <div class="title">Código</div>
@@ -281,14 +276,10 @@
   <div class="toast" id="toast">Copiado</div>
 
   <script>
-    // ======================
-    // CONFIG (tu fetch real)
-    // ======================
     const API_ENDPOINT = "/api/generate";
     const MAX_USAGE = 3;
     let usageCount = 0;
 
-    // ====== UI refs ======
     const elPrompt = document.getElementById("prompt");
     const btnGenerate = document.getElementById("btnGenerate");
     const btnReset = document.getElementById("btnReset");
@@ -302,43 +293,46 @@
     const tabs = document.getElementById("tabs");
     const toast = document.getElementById("toast");
 
-    let last = { html:"", css:"", js:"", full:"" };
+    let last = { html: "", css: "", js: "", full: "" };
     let activeTab = "html";
 
-    // ====== Helpers ======
-    function setStatus(text){ statusText.textContent = text; }
-    function updateUsageUI(){
+    function setStatus(text) {
+      statusText.textContent = text;
+    }
+
+    function updateUsageUI() {
       const remaining = Math.max(0, MAX_USAGE - usageCount);
       usesText.textContent = "Usos restantes: " + remaining;
       limitText.textContent = MAX_USAGE + " usos";
       btnGenerate.disabled = remaining <= 0;
     }
-    function showToast(msg){
+
+    function showToast(msg) {
       toast.textContent = msg;
       toast.classList.add("show");
-      setTimeout(()=>toast.classList.remove("show"), 1100);
-    }
-    function escapeHtml(s){
-      return (s ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;");
+      setTimeout(() => toast.classList.remove("show"), 1100);
     }
 
-    // Basic HTML formatter (estable + sin dependencias)
-    function formatHTML(html){
+    function escapeHtml(s) {
+      return (s ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;");
+    }
+
+    function formatHTML(html) {
       html = (html ?? "").trim();
-      if(!html) return "";
-      html = html.replace(/\r\n/g,"\n").replace(/\t/g,"  ");
+      if (!html) return "";
+      html = html.replace(/\r\n/g, "\n").replace(/\t/g, "  ");
       html = html.replace(/></g, ">\n<");
       const lines = html.split("\n");
       let indent = 0;
       const out = [];
       const voidTag = /^<\s*(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)(\s|\/|>)/i;
 
-      for (let line of lines){
+      for (let line of lines) {
         line = line.trim();
-        if(!line) continue;
+        if (!line) continue;
 
         const isClosing = /^<\/.+>/.test(line);
         const isOpening = /^<[^!\/].*>$/.test(line) && !/\/>$/.test(line) && !voidTag.test(line);
@@ -348,14 +342,14 @@
         out.push("  ".repeat(indent) + line);
         if (isOpening && !isSelfClosing && !line.startsWith("<!")) indent += 1;
       }
+
       return out.join("\n");
     }
 
-    // Extrae CSS/JS si el backend devuelve documento HTML completo (best-effort)
-    function splitCode(fullHtml){
+    function splitCode(fullHtml) {
       const full = fullHtml ?? "";
-      const css = Array.from(full.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)).map(m=>m[1].trim()).join("\n\n");
-      const js  = Array.from(full.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)).map(m=>m[1].trim()).join("\n\n");
+      const css = Array.from(full.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)).map(m => m[1].trim()).join("\n\n");
+      const js = Array.from(full.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)).map(m => m[1].trim()).join("\n\n");
 
       const html = full
         .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
@@ -365,69 +359,63 @@
       return { html, css, js, full };
     }
 
-    function renderPreview(fullHtml){
+    function renderPreview(fullHtml) {
       const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
       doc.open();
       doc.write(fullHtml || "<!doctype html><html><body></body></html>");
       doc.close();
     }
 
-    function renderCode(){
+    function renderCode() {
       let content = "";
-      if(activeTab === "html") content = formatHTML(last.html || last.full);
-      if(activeTab === "css")  content = (last.css || "").trim();
-      if(activeTab === "js")   content = (last.js || "").trim();
-      if(!content) content = "(vacío)";
+      if (activeTab === "html") content = formatHTML(last.html || last.full);
+      if (activeTab === "css") content = (last.css || "").trim();
+      if (activeTab === "js") content = (last.js || "").trim();
+      if (!content) content = "(vacío)";
       codeBlock.innerHTML = escapeHtml(content);
     }
 
-    function setTab(tab){
+    function setTab(tab) {
       activeTab = tab;
-      Array.from(tabs.querySelectorAll(".tab")).forEach(b=>{
+      Array.from(tabs.querySelectorAll(".tab")).forEach(b => {
         b.classList.toggle("active", b.dataset.tab === tab);
       });
       renderCode();
     }
 
-    async function copyActive(){
+    async function copyActive() {
       let content = "";
-      if(activeTab === "html") content = formatHTML(last.html || last.full);
-      if(activeTab === "css")  content = (last.css || "").trim();
-      if(activeTab === "js")   content = (last.js || "").trim();
+      if (activeTab === "html") content = formatHTML(last.html || last.full);
+      if (activeTab === "css") content = (last.css || "").trim();
+      if (activeTab === "js") content = (last.js || "").trim();
       await navigator.clipboard.writeText(content || "");
       showToast("Copiado: " + activeTab.toUpperCase());
     }
 
-    function openInNewTab(){
+    function openInNewTab() {
       const w = window.open("", "_blank");
-      if(!w) return;
+      if (!w) return;
       w.document.open();
       w.document.write(last.full || "<!doctype html><html><body></body></html>");
       w.document.close();
     }
 
-    // ======================
-    // TU FETCH incorporado
-    // ======================
-    async function generateFromBackend(promptText){
+    async function generateFromBackend(promptText) {
       const response = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: promptText })
       });
 
-      // tu backend actual responde JSON; si falla, intentamos leer texto
-      if(!response.ok){
-        const txt = await response.text().catch(()=> "");
+      if (!response.ok) {
+        const txt = await response.text().catch(() => "");
         throw new Error(txt || ("HTTP " + response.status));
       }
 
-      const data = await response.json();
-      return data; // { result: "..."} o { error: "..."}
+      return await response.json();
     }
 
-    async function onGenerate(){
-      // Límite demo en frontend (tu versión actual)
+    async function onGenerate() {
       if (usageCount >= MAX_USAGE) {
         setStatus("Límite alcanzado");
         showToast("Límite demo alcanzado");
@@ -435,66 +423,69 @@
       }
 
       const promptText = (elPrompt.value || "").trim();
-      if(!promptText){
+      if (!promptText) {
         showToast("Escribe algo antes de generar");
         elPrompt.focus();
         return;
       }
 
       btnGenerate.disabled = true;
-      setStatus("Generando…");
+      setStatus("Generando...");
 
-      try{
+      try {
         const data = await generateFromBackend(promptText);
+        const rawResponse = data?.html ?? data?.result ?? "";
 
-        if (data && data.result) {
+        if (rawResponse) {
           usageCount++;
           updateUsageUI();
 
-          // Si el backend devuelve HTML completo, lo renderizamos.
-          // Si devuelve texto/fragmento, lo envolvemos en HTML mínimo.
-          const raw = String(data.result);
-
+          const raw = String(rawResponse);
           const looksLikeHtml = /<\s*(!doctype|html|head|body|div|section|main|style|script)\b/i.test(raw);
+
           const fullHtml = looksLikeHtml
             ? raw
             : `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Salida — SISTEMA MAESTRO IA</title></head><body>${raw}</body></html>`;
 
           last = splitCode(fullHtml);
-
           renderPreview(last.full);
           renderCode();
-
           setStatus("OK");
-
         } else {
           const msg = (data && data.error) ? String(data.error) : "Error desconocido.";
           setStatus("Error");
           showToast(msg.slice(0, 90));
 
-          // Mostrar el error también en el panel de código (pestaña HTML)
-          last = { html: "", css: "", js: "", full: `<!doctype html><html><body style="font-family:system-ui;padding:24px">${escapeHtml(msg)}</body></html>` };
+          last = {
+            html: "",
+            css: "",
+            js: "",
+            full: `<!doctype html><html><body style="font-family:system-ui;padding:24px">${escapeHtml(msg)}</body></html>`
+          };
           renderPreview(last.full);
           renderCode();
         }
-
       } catch (error) {
         console.error(error);
         setStatus("Error de conexión");
         showToast("Error de conexión con el backend");
 
-        last = { html:"", css:"", js:"", full:`<!doctype html><html><body style="font-family:system-ui;padding:24px">Error de conexión con el backend.</body></html>` };
+        last = {
+          html: "",
+          css: "",
+          js: "",
+          full: `<!doctype html><html><body style="font-family:system-ui;padding:24px">Error de conexión con el backend.</body></html>`
+        };
         renderPreview(last.full);
         renderCode();
-
-      } finally{
+      } finally {
         btnGenerate.disabled = (usageCount >= MAX_USAGE);
       }
     }
 
-    function onReset(){
+    function onReset() {
       elPrompt.value = "";
-      last = { html:"", css:"", js:"", full:"" };
+      last = { html: "", css: "", js: "", full: "" };
       usageCount = 0;
       updateUsageUI();
       renderPreview("<!doctype html><html><body style='font-family:system-ui;padding:24px'>Listo.</body></html>");
@@ -502,26 +493,23 @@
       setTab("html");
     }
 
-    // ====== Events ======
     btnGenerate.addEventListener("click", onGenerate);
     btnReset.addEventListener("click", onReset);
     btnCopy.addEventListener("click", copyActive);
     btnOpenNew.addEventListener("click", openInNewTab);
-    tabs.addEventListener("click", (e)=>{
+    tabs.addEventListener("click", (e) => {
       const b = e.target.closest(".tab");
-      if(!b) return;
+      if (!b) return;
       setTab(b.dataset.tab);
     });
 
-    // init
     onReset();
   </script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}
-</script>
 
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/sw.js");
+    }
+  </script>
 </body>
-
 </html>
