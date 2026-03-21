@@ -1,39 +1,37 @@
-async function generarWeb() {
+function generarWeb() {
   const textarea = document.getElementById("prompt");
   const resultado = document.getElementById("resultado");
 
+  alert("botón funciona");
+
   if (!textarea || !resultado) {
-    alert("Falta el campo prompt o el bloque resultado");
+    alert("Falta textarea o resultado");
     return;
   }
 
   const prompt = textarea.value.trim();
 
   if (!prompt) {
-    alert("Escribe una idea antes de generar");
+    alert("Escribe algo");
     return;
   }
 
   resultado.textContent = "Generando...";
 
-  try {
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ prompt })
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || "Error al generar");
-    }
-
+  fetch("/api/generate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ prompt })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
     resultado.textContent = data.html;
-  } catch (error) {
-    console.error(error);
-    resultado.textContent = "Error: " + error.message;
-  }
+  })
+  .catch(err => {
+    console.error(err);
+    resultado.textContent = "Error";
+  });
 }
