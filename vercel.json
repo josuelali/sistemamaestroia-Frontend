@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "routes": [
+    { "handle": "filesystem" },
     {
-      "source": "/api/generate",
-      "destination": "https://systema-maestro-backend.onrender.com/generate"
+      "src": "/api/generate",
+      "dest": "https://systema-maestro-backend.onrender.com/generate"
     }
   ]
 }
