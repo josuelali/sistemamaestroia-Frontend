@@ -1,35 +1,9 @@
-async function runTask() {
-  try {
-    const response = await fetch("https://TU-URL-RENDER/run-task", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        assistant: "SEO",
-        task: "crear_articulo",
-        input: "automatizar negocios con inteligencia artificial"
-      })
-    });
-
-    const data = await response.json();
-
-    console.log(data);
-
-    document.getElementById("resultado").innerText = data.result;
-
-  } catch (error) {
-    console.error(error);
-    alert("Error conectando con backend");
-  }
-}
-
 async function generarWeb() {
-  const textarea = document.querySelector("textarea");
-  const resultado = document.querySelector("#resultado");
+  const textarea = document.getElementById("prompt");
+  const resultado = document.getElementById("resultado");
 
   if (!textarea || !resultado) {
-    alert("Falta el textarea o el contenedor #resultado");
+    alert("Falta el campo prompt o el bloque resultado");
     return;
   }
 
@@ -43,7 +17,7 @@ async function generarWeb() {
   resultado.textContent = "Generando...";
 
   try {
-    const res = await fetch("/api/generate", {
+    const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -51,21 +25,15 @@ async function generarWeb() {
       body: JSON.stringify({ prompt })
     });
 
-    const data = await res.json();
+    const data = await response.json();
 
-    if (!res.ok) {
-      throw new Error(data.error || "Error generando la web");
+    if (!response.ok) {
+      throw new Error(data.error || "Error al generar");
     }
 
     resultado.textContent = data.html;
   } catch (error) {
+    console.error(error);
     resultado.textContent = "Error: " + error.message;
   }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  const boton = document.querySelector("button");
-  if (boton) {
-    boton.addEventListener("click", generarWeb);
-  }
-});
