@@ -24,12 +24,13 @@ body{
 }
 
 /* HERO */
-.hero{
-  position:relative;
-  padding:100px 0;
-  background:url("hero-image.png") center/cover no-repeat;
+.hero {
+  background: url('hero-image.png') center center / cover no-repeat;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
 .hero-overlay{
   position:absolute;
   inset:0;
