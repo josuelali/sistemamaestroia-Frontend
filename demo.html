@@ -2,69 +2,157 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<title>Sistema Maestro IA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Demo Sistema Maestro IA</title>
 
 <style>
-body {
-  font-family: Arial;
-  background: #0b1220;
-  color: white;
-  padding: 40px;
+body{
+  font-family:Arial;
+  background:#0b1220;
+  color:white;
+  padding:40px;
+  text-align:center;
 }
 
-.container {
-  max-width: 700px;
-  margin: auto;
+/* INPUT */
+textarea{
+  width:100%;
+  max-width:600px;
+  height:120px;
+  padding:10px;
+  border-radius:8px;
 }
 
-textarea {
-  width: 100%;
-  height: 120px;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
+/* BOTÓN */
+button{
+  margin-top:10px;
+  padding:14px 20px;
+  background:#22c55e;
+  color:black;
+  border:none;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-button {
-  margin-top: 10px;
-  padding: 12px 20px;
-  background: #22c55e;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
+/* OUTPUT */
+#output{
+  margin-top:30px;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
+  background:#111827;
+  padding:20px;
+  border-radius:10px;
+  white-space:pre-wrap;
 }
 
-#output {
-  margin-top: 30px;
-  background: #111827;
-  padding: 20px;
-  border-radius: 10px;
-  white-space: pre-wrap;
+/* CONTADOR */
+.limit{
+  margin-top:10px;
+  font-size:14px;
+  opacity:0.7;
+}
+
+/* TIMER */
+.timer{
+  margin-top:10px;
+  color:#facc15;
+}
+
+/* EMAIL */
+.email-box{
+  margin-top:20px;
+}
+
+.email-box input{
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  width:220px;
+}
+
+/* PAYWALL */
+.paywall{
+  margin-top:30px;
+  padding:30px;
+  background:#111827;
+  border-radius:12px;
+}
+
+.paywall a{
+  display:inline-block;
+  margin-top:15px;
+  padding:14px 22px;
+  background:#22c55e;
+  color:black;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <h1>🚀 Sistema Maestro IA</h1>
+<h1>🚀 Crea tu sistema con IA</h1>
 
-  <textarea id="prompt" placeholder="Ej: quiero ganar dinero con IA"></textarea>
+<div class="timer" id="timer"></div>
 
-  <button id="btn">Generar</button>
+<textarea id="prompt" placeholder="Ej: quiero ganar dinero con IA"></textarea><br>
 
-  <div id="output"></div>
+<button id="btn">Generar sistema</button>
+
+<div class="limit" id="limit"></div>
+
+<div class="email-box">
+  <input type="email" id="email" placeholder="Tu email (opcional)">
 </div>
 
-<script>
-const btn = document.getElementById("btn");
+<div id="output"></div>
 
-btn.addEventListener("click", async () => {
+<div id="paywall"></div>
+
+<script>
+let usos = parseInt(localStorage.getItem("usos") || 0);
+const MAX = 3;
+
+/* CONTADOR */
+function updateUI(){
+  document.getElementById("limit").innerText =
+    "Usos restantes: " + (MAX - usos);
+}
+updateUI();
+
+/* TIMER URGENCIA */
+let time = 300;
+setInterval(() => {
+  let min = Math.floor(time / 60);
+  let sec = time % 60;
+  document.getElementById("timer").innerText =
+    "⏳ Oferta expira en: " + min + ":" + (sec < 10 ? "0" : "") + sec;
+  time--;
+}, 1000);
+
+/* GUARDAR RESULTADOS */
+function saveResult(text){
+  let history = JSON.parse(localStorage.getItem("historial") || "[]");
+  history.push(text);
+  localStorage.setItem("historial", JSON.stringify(history));
+}
+
+/* BOTÓN */
+document.getElementById("btn").addEventListener("click", async () => {
+
+  if (usos >= MAX) {
+    showPaywall();
+    return;
+  }
 
   const prompt = document.getElementById("prompt").value;
 
-  if (!prompt) {
+  if (!prompt){
     alert("Escribe algo");
     return;
   }
@@ -73,7 +161,7 @@ btn.addEventListener("click", async () => {
 
   try {
 
-    const res = await fetch("http://localhost:3000/api/generate", {
+    const res = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -83,14 +171,42 @@ btn.addEventListener("click", async () => {
 
     const data = await res.json();
 
+    usos++;
+    localStorage.setItem("usos", usos);
+
+    updateUI();
+
     document.getElementById("output").innerText = data.result;
 
-  } catch (err) {
-    console.error(err);
-    document.getElementById("output").innerText = "Error conectando con backend";
+    saveResult(data.result);
+
+    if (usos >= MAX){
+      showPaywall();
+    }
+
+  } catch (err){
+    document.getElementById("output").innerText = "Error IA";
   }
 
 });
+
+/* PAYWALL */
+function showPaywall(){
+  const email = document.getElementById("email").value;
+
+  document.getElementById("paywall").innerHTML = `
+    <div class="paywall">
+      <h2>🚫 Has alcanzado el límite</h2>
+      <p>Desbloquea el sistema completo ahora</p>
+
+      ${email ? `<p>Email guardado: ${email}</p>` : ""}
+
+      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01">
+        🔓 Activar PRO
+      </a>
+    </div>
+  `;
+}
 </script>
 
 </body>
