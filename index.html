@@ -12,16 +12,14 @@
 body{
   margin:0;
   font-family:'Inter',sans-serif;
-  background:#060B1A;
+  background:#050A18;
   color:white;
 }
 
 /* HERO */
 .hero{
-  position:relative;
   text-align:center;
   padding:120px 20px;
-  background:linear-gradient(180deg,#060B1A,#0b1220);
 }
 
 .hero-content{
@@ -29,8 +27,19 @@ body{
   margin:auto;
 }
 
+.badge{
+  display:inline-block;
+  background:#22c55e;
+  color:black;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
 h1{
-  font-size:52px;
+  font-size:54px;
   margin-bottom:20px;
   font-weight:800;
 }
@@ -39,10 +48,17 @@ h1{
   color:#22c55e;
 }
 
-.hero p{
+.sub{
   font-size:20px;
   opacity:0.9;
-  margin-bottom:30px;
+  margin-bottom:25px;
+}
+
+/* URGENCIA */
+.urgency{
+  font-size:14px;
+  color:#facc15;
+  margin-bottom:25px;
 }
 
 /* BOTONES */
@@ -51,36 +67,38 @@ h1{
   gap:15px;
   justify-content:center;
   flex-wrap:wrap;
-  margin-bottom:40px;
+  margin-bottom:30px;
 }
 
-.btn-pro{
-  padding:16px 30px;
+.btn-main{
+  padding:18px 34px;
   background:#22c55e;
+  color:black;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:800;
+  font-size:18px;
+  box-shadow:0 0 20px rgba(34,197,94,0.4);
+}
+
+.btn-secondary{
+  padding:14px 26px;
+  background:#1e293b;
   color:white;
   border-radius:10px;
   text-decoration:none;
-  font-weight:700;
+  font-weight:600;
 }
 
-.btn-demo{
-  padding:14px 26px;
-  background:#38bdf8;
-  color:#060B1A;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:700;
-}
-
-/* GENERADOR */
+/* INPUT */
 .generator-box{
-  max-width:800px;
-  margin:0 auto;
+  max-width:700px;
+  margin:20px auto;
 }
 
 textarea{
   width:100%;
-  min-height:140px;
+  min-height:130px;
   border-radius:12px;
   padding:16px;
   font-size:16px;
@@ -90,16 +108,17 @@ textarea{
 }
 
 /* PRUEBA SOCIAL */
-.trust{
+.proof{
   margin-top:20px;
   font-size:14px;
-  opacity:0.7;
+  opacity:0.8;
 }
 
+/* FOOTER */
 footer{
   padding:40px;
   text-align:center;
-  opacity:0.6;
+  opacity:0.5;
 }
 </style>
 </head>
@@ -109,37 +128,45 @@ footer{
 <section class="hero">
   <div class="hero-content">
 
-    <!-- HEADLINE QUE VENDE -->
+    <!-- MICRO HOOK -->
+    <div class="badge">⚡ Nuevo sistema IA</div>
+
+    <!-- HEADLINE -->
     <h1>
-      Crea un sistema que <span class="highlight">genera dinero con IA</span>
+      Genera ingresos con IA <span class="highlight">sin saber programar</span>
     </h1>
 
     <!-- SUBHEAD -->
-    <p>
-      Sin programar. Sin equipo. En menos de 60 segundos.
-    </p>
+    <div class="sub">
+      Crea sistemas automáticos que trabajan por ti en minutos
+    </div>
 
-    <!-- CTAs -->
+    <!-- URGENCIA -->
+    <div class="urgency">
+      ⚠️ Acceso gratuito limitado hoy
+    </div>
+
+    <!-- CTA -->
     <div class="buttons">
 
-      <a href="/demo.html" class="btn-demo">
-        🚀 Empieza gratis
+      <a href="/demo.html" class="btn-main">
+        🚀 Crear mi sistema ahora
       </a>
 
-      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-pro">
-        Activar PRO
+      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-secondary">
+        Ver versión PRO
       </a>
 
     </div>
 
-    <!-- INPUT (ENGANCHE) -->
+    <!-- INPUT -->
     <div class="generator-box">
-      <textarea placeholder="Ej: quiero ganar dinero con IA creando contenido automático..."></textarea>
+      <textarea placeholder="Ej: quiero crear un sistema que genere ingresos con IA automáticamente..."></textarea>
     </div>
 
-    <!-- PRUEBA SOCIAL -->
-    <div class="trust">
-      Usado para crear sistemas automatizados de ingresos digitales
+    <!-- PRUEBA -->
+    <div class="proof">
+      Más de ideas y sistemas generados automáticamente con IA
     </div>
 
   </div>
