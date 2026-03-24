@@ -16,44 +16,42 @@ body{
   color:white;
 }
 
-/* HERO CON IMAGEN */
+/* HERO */
 .hero{
   position:relative;
   text-align:center;
   padding:120px 20px;
-  background-image:url('/hero-image.png');
-  background-size:cover;
-  background-position:center;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
+  background:linear-gradient(180deg,#060B1A,#0b1220);
 }
 
 .hero-content{
-  position:relative;
-  z-index:2;
   max-width:900px;
   margin:auto;
 }
 
-h1{font-size:48px;margin-bottom:20px;}
-h2{font-size:36px;margin-bottom:16px;}
+h1{
+  font-size:52px;
+  margin-bottom:20px;
+  font-weight:800;
+}
+
+.highlight{
+  color:#22c55e;
+}
 
 .hero p{
   font-size:20px;
   opacity:0.9;
+  margin-bottom:30px;
 }
 
+/* BOTONES */
 .buttons{
   display:flex;
   gap:15px;
   justify-content:center;
-  margin-top:30px;
   flex-wrap:wrap;
+  margin-bottom:40px;
 }
 
 .btn-pro{
@@ -76,8 +74,8 @@ h2{font-size:36px;margin-bottom:16px;}
 
 /* GENERADOR */
 .generator-box{
-  max-width:900px;
-  margin:40px auto 0;
+  max-width:800px;
+  margin:0 auto;
 }
 
 textarea{
@@ -85,37 +83,17 @@ textarea{
   min-height:140px;
   border-radius:12px;
   padding:16px;
-  border:1px solid #334155;
   font-size:16px;
-}
-
-/* SECCIONES */
-.section-dark{
+  border:1px solid #334155;
   background:#0b1220;
-  padding:80px 20px;
-  text-align:center;
+  color:white;
 }
 
-/* PROYECTOS */
-.projects{
-  display:flex;
-  flex-wrap:wrap;
-  gap:25px;
-  justify-content:center;
-  margin-top:40px;
-}
-
-.project-card{
-  background:#111827;
-  padding:30px;
-  border-radius:12px;
-  width:280px;
-}
-
-.project-card a{
-  color:#38bdf8;
-  text-decoration:none;
-  font-weight:bold;
+/* PRUEBA SOCIAL */
+.trust{
+  margin-top:20px;
+  font-size:14px;
+  opacity:0.7;
 }
 
 footer{
@@ -128,59 +106,40 @@ footer{
 
 <body>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
 
-    <h1>🚀 Sistema Maestro IA</h1>
-    <p>Crea sistemas automáticos que generan dinero con IA</p>
+    <!-- HEADLINE QUE VENDE -->
+    <h1>
+      Crea un sistema que <span class="highlight">genera dinero con IA</span>
+    </h1>
 
+    <!-- SUBHEAD -->
+    <p>
+      Sin programar. Sin equipo. En menos de 60 segundos.
+    </p>
+
+    <!-- CTAs -->
     <div class="buttons">
-      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-pro">
-        Activar Plan PRO
-      </a>
 
       <a href="/demo.html" class="btn-demo">
-        Empieza gratis
+        🚀 Empieza gratis
       </a>
+
+      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-pro">
+        Activar PRO
+      </a>
+
     </div>
 
+    <!-- INPUT (ENGANCHE) -->
     <div class="generator-box">
-      <textarea placeholder="Ej: quiero ganar dinero con IA"></textarea>
+      <textarea placeholder="Ej: quiero ganar dinero con IA creando contenido automático..."></textarea>
     </div>
 
-  </div>
-</section>
-
-<!-- BLOQUE VALOR -->
-<section class="section-dark">
-  <h2>Orquesta asistentes con control total</h2>
-  <p>Versionado, logs completos, rollback y ejecución controlada.</p>
-</section>
-
-<!-- ECOSISTEMA (RESTAURADO) -->
-<section class="section-dark">
-  <h2>Nuestros Proyectos</h2>
-  <p>Ecosistema digital orientado a automatización, monetización y generación de ingresos con IA.</p>
-
-  <div class="projects">
-
-    <div class="project-card">
-      <h3>VendeConIA</h3>
-      <p>Aprende a generar ingresos online usando inteligencia artificial.</p>
-      <a href="https://vendeconia.org" target="_blank">Visitar →</a>
-    </div>
-
-    <div class="project-card">
-      <h3>InfoVendeConIA</h3>
-      <p>Guías prácticas sobre herramientas y monetización digital.</p>
-      <a href="https://infovendeconia.com" target="_blank">Visitar →</a>
-    </div>
-
-    <div class="project-card">
-      <h3>AutomatizaTuNegocio</h3>
-      <p>Automatizaciones simples para negocios reales.</p>
-      <a href="https://automatizatunegocio.org" target="_blank">Visitar →</a>
+    <!-- PRUEBA SOCIAL -->
+    <div class="trust">
+      Usado para crear sistemas automatizados de ingresos digitales
     </div>
 
   </div>
