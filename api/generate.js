@@ -1,77 +1,48 @@
 export default async function handler(req, res) {
-  // Solo permitir POST
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const { prompt } = req.body;
-
-  // Validación básica
-  if (!prompt) {
-    return res.status(400).json({ error: "Missing prompt" });
-  }
-
   try {
-    // Prompt optimizado para generar valor real
-    const aiPrompt = `
-Actúa como un sistema experto en crear negocios automatizados con inteligencia artificial.
+    const { prompt } = req.body;
 
-Tu objetivo es generar sistemas prácticos que puedan generar dinero.
+    if (!prompt) {
+      return res.status(400).json({ error: "No prompt provided" });
+    }
 
-Devuelve SIEMPRE esta estructura:
-
-1. IDEA DE NEGOCIO
-2. SISTEMA (cómo funciona)
-3. PASOS ACCIONABLES (paso a paso claro)
-4. AUTOMATIZACIÓN (cómo hacerlo automático)
-5. MONETIZACIÓN (cómo gana dinero)
-
-Sé directo, práctico y sin teoría innecesaria.
-
-Usuario: ${prompt}
-`;
-
-    // Llamada a OpenAI
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${process.env.GROQ_API_KEY}`
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: "llama3-70b-8192",
         messages: [
           {
+            role: "system",
+            content: "Eres un experto en crear sistemas para ganar dinero online con IA. Responde con pasos claros y accionables."
+          },
+          {
             role: "user",
-            content: aiPrompt
+            content: prompt
           }
         ],
         temperature: 0.7
       })
     });
 
-    // Control de errores de OpenAI
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("OpenAI error:", errorText);
-      return res.status(500).json({ error: "OpenAI API error" });
-    }
-
     const data = await response.json();
 
-    // Extraer resultado de forma segura
     const result =
       data?.choices?.[0]?.message?.content ||
       "Error generando resultado";
 
-    // Log (para mejorar luego)
-    console.log("INPUT:", prompt);
-    console.log("OUTPUT:", result);
-
     return res.status(200).json({ result });
 
   } catch (error) {
-    console.error("Server error:", error);
-    return res.status(500).json({ error: "Internal server error" });
+    console.error(error);
+    return res.status(500).json({ error: "Error en servidor" });
   }
 }

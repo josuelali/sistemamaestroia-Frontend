@@ -4,79 +4,61 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Demo Sistema Maestro IA</title>
+<title>Crear sistema IA</title>
 
 <style>
 body{
   font-family:Arial;
-  background:#0b1220;
+  background:linear-gradient(180deg,#050A18,#0b1220);
   color:white;
-  padding:40px;
   text-align:center;
+  padding:40px;
 }
 
-/* INPUT */
+h1{
+  font-size:36px;
+}
+
+.highlight{
+  color:#22c55e;
+}
+
 textarea{
   width:100%;
   max-width:600px;
   height:120px;
-  padding:10px;
-  border-radius:8px;
+  padding:15px;
+  border-radius:10px;
+  border:none;
+  font-size:16px;
 }
 
-/* BOTÓN */
 button{
-  margin-top:10px;
-  padding:14px 20px;
+  margin-top:15px;
+  padding:16px 26px;
   background:#22c55e;
   color:black;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
   font-weight:bold;
+  font-size:16px;
   cursor:pointer;
 }
 
-/* OUTPUT */
 #output{
   margin-top:30px;
   max-width:700px;
   margin-left:auto;
   margin-right:auto;
   background:#111827;
-  padding:20px;
-  border-radius:10px;
+  padding:25px;
+  border-radius:12px;
   white-space:pre-wrap;
 }
 
-/* CONTADOR */
-.limit{
-  margin-top:10px;
-  font-size:14px;
-  opacity:0.7;
-}
-
-/* TIMER */
-.timer{
-  margin-top:10px;
-  color:#facc15;
-}
-
-/* EMAIL */
-.email-box{
-  margin-top:20px;
-}
-
-.email-box input{
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  width:220px;
-}
-
-/* PAYWALL */
 .paywall{
   margin-top:30px;
-  padding:30px;
+  padding:25px;
   background:#111827;
   border-radius:12px;
 }
@@ -84,7 +66,7 @@ button{
 .paywall a{
   display:inline-block;
   margin-top:15px;
-  padding:14px 22px;
+  padding:14px 20px;
   background:#22c55e;
   color:black;
   border-radius:10px;
@@ -96,53 +78,23 @@ button{
 
 <body>
 
-<h1>🚀 Crea tu sistema con IA</h1>
+<h1>
+  🚀 Genera un <span class="highlight">sistema de ingresos</span> con IA
+</h1>
 
-<div class="timer" id="timer"></div>
-
-<textarea id="prompt" placeholder="Ej: quiero ganar dinero con IA"></textarea><br>
+<textarea id="prompt" placeholder="Ej: quiero automatizar mi negocio"></textarea><br>
 
 <button id="btn">Generar sistema</button>
 
-<div class="limit" id="limit"></div>
-
-<div class="email-box">
-  <input type="email" id="email" placeholder="Tu email (opcional)">
-</div>
-
 <div id="output"></div>
-
 <div id="paywall"></div>
 
 <script>
-let usos = parseInt(localStorage.getItem("usos") || 0);
+let usos = localStorage.getItem("usos") || 0;
+usos = parseInt(usos);
+
 const MAX = 3;
 
-/* CONTADOR */
-function updateUI(){
-  document.getElementById("limit").innerText =
-    "Usos restantes: " + (MAX - usos);
-}
-updateUI();
-
-/* TIMER URGENCIA */
-let time = 300;
-setInterval(() => {
-  let min = Math.floor(time / 60);
-  let sec = time % 60;
-  document.getElementById("timer").innerText =
-    "⏳ Oferta expira en: " + min + ":" + (sec < 10 ? "0" : "") + sec;
-  time--;
-}, 1000);
-
-/* GUARDAR RESULTADOS */
-function saveResult(text){
-  let history = JSON.parse(localStorage.getItem("historial") || "[]");
-  history.push(text);
-  localStorage.setItem("historial", JSON.stringify(history));
-}
-
-/* BOTÓN */
 document.getElementById("btn").addEventListener("click", async () => {
 
   if (usos >= MAX) {
@@ -151,11 +103,6 @@ document.getElementById("btn").addEventListener("click", async () => {
   }
 
   const prompt = document.getElementById("prompt").value;
-
-  if (!prompt){
-    alert("Escribe algo");
-    return;
-  }
 
   document.getElementById("output").innerText = "Generando...";
 
@@ -174,32 +121,23 @@ document.getElementById("btn").addEventListener("click", async () => {
     usos++;
     localStorage.setItem("usos", usos);
 
-    updateUI();
-
     document.getElementById("output").innerText = data.result;
 
-    saveResult(data.result);
-
-    if (usos >= MAX){
+    if (usos >= MAX) {
       showPaywall();
     }
 
-  } catch (err){
+  } catch (e) {
     document.getElementById("output").innerText = "Error IA";
   }
 
 });
 
-/* PAYWALL */
 function showPaywall(){
-  const email = document.getElementById("email").value;
-
   document.getElementById("paywall").innerHTML = `
     <div class="paywall">
-      <h2>🚫 Has alcanzado el límite</h2>
-      <p>Desbloquea el sistema completo ahora</p>
-
-      ${email ? `<p>Email guardado: ${email}</p>` : ""}
+      <h2>🚫 Has llegado al límite</h2>
+      <p>Desbloquea generación ilimitada</p>
 
       <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01">
         🔓 Activar PRO
