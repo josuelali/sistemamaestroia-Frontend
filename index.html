@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Sistema Maestro IA</title>
-<meta name="description" content="Sistema Maestro IA – Crea sistemas automáticos que generan dinero con IA.">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
@@ -17,20 +16,32 @@ body{
   color:white;
 }
 
+/* HERO CON IMAGEN */
 .hero{
+  position:relative;
   text-align:center;
   padding:120px 20px;
+  background-image:url('/hero-image.png');
+  background-size:cover;
+  background-position:center;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.6);
 }
 
 .hero-content{
+  position:relative;
+  z-index:2;
   max-width:900px;
   margin:auto;
 }
 
-h1{
-  font-size:48px;
-  margin-bottom:20px;
-}
+h1{font-size:48px;margin-bottom:20px;}
+h2{font-size:36px;margin-bottom:16px;}
 
 .hero p{
   font-size:20px;
@@ -39,10 +50,10 @@ h1{
 
 .buttons{
   display:flex;
-  flex-wrap:wrap;
   gap:15px;
   justify-content:center;
   margin-top:30px;
+  flex-wrap:wrap;
 }
 
 .btn-pro{
@@ -52,7 +63,6 @@ h1{
   border-radius:10px;
   text-decoration:none;
   font-weight:700;
-  font-size:18px;
 }
 
 .btn-demo{
@@ -60,10 +70,11 @@ h1{
   background:#38bdf8;
   color:#060B1A;
   border-radius:10px;
-  font-weight:700;
   text-decoration:none;
+  font-weight:700;
 }
 
+/* GENERADOR */
 .generator-box{
   max-width:900px;
   margin:40px auto 0;
@@ -71,46 +82,105 @@ h1{
 
 textarea{
   width:100%;
-  min-height:160px;
+  min-height:140px;
   border-radius:12px;
-  border:1px solid #334155;
   padding:16px;
+  border:1px solid #334155;
   font-size:16px;
 }
 
+/* SECCIONES */
+.section-dark{
+  background:#0b1220;
+  padding:80px 20px;
+  text-align:center;
+}
+
+/* PROYECTOS */
+.projects{
+  display:flex;
+  flex-wrap:wrap;
+  gap:25px;
+  justify-content:center;
+  margin-top:40px;
+}
+
+.project-card{
+  background:#111827;
+  padding:30px;
+  border-radius:12px;
+  width:280px;
+}
+
+.project-card a{
+  color:#38bdf8;
+  text-decoration:none;
+  font-weight:bold;
+}
+
 footer{
-  padding:40px 20px;
+  padding:40px;
   text-align:center;
   opacity:0.6;
-  font-size:14px;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
 
-    <h1>Sistema Maestro IA</h1>
+    <h1>🚀 Sistema Maestro IA</h1>
     <p>Crea sistemas automáticos que generan dinero con IA</p>
 
     <div class="buttons">
-
-      <!-- CTA PRINCIPAL (DINERO) -->
       <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-pro">
-        🚀 Activar Plan PRO
+        Activar Plan PRO
       </a>
 
-      <!-- CTA DEMO (FUNNEL) -->
       <a href="/demo.html" class="btn-demo">
-        🚀 Empieza gratis
+        Empieza gratis
       </a>
-
     </div>
 
     <div class="generator-box">
       <textarea placeholder="Ej: quiero ganar dinero con IA"></textarea>
+    </div>
+
+  </div>
+</section>
+
+<!-- BLOQUE VALOR -->
+<section class="section-dark">
+  <h2>Orquesta asistentes con control total</h2>
+  <p>Versionado, logs completos, rollback y ejecución controlada.</p>
+</section>
+
+<!-- ECOSISTEMA (RESTAURADO) -->
+<section class="section-dark">
+  <h2>Nuestros Proyectos</h2>
+  <p>Ecosistema digital orientado a automatización, monetización y generación de ingresos con IA.</p>
+
+  <div class="projects">
+
+    <div class="project-card">
+      <h3>VendeConIA</h3>
+      <p>Aprende a generar ingresos online usando inteligencia artificial.</p>
+      <a href="https://vendeconia.org" target="_blank">Visitar →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>InfoVendeConIA</h3>
+      <p>Guías prácticas sobre herramientas y monetización digital.</p>
+      <a href="https://infovendeconia.com" target="_blank">Visitar →</a>
+    </div>
+
+    <div class="project-card">
+      <h3>AutomatizaTuNegocio</h3>
+      <p>Automatizaciones simples para negocios reales.</p>
+      <a href="https://automatizatunegocio.org" target="_blank">Visitar →</a>
     </div>
 
   </div>
