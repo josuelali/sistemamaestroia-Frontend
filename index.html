@@ -6,175 +6,156 @@
 
 <title>Sistema Maestro IA</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="assets/favicon.ico">
 
 <style>
 body{
-  margin:0;
-  font-family:'Inter',sans-serif;
-  background:#050A18;
+  font-family: Arial;
+  background: linear-gradient(180deg,#050A18,#0b1220);
   color:white;
+  margin:0;
 }
 
 /* HERO */
 .hero{
   text-align:center;
-  padding:120px 20px;
+  padding:60px 20px;
 }
 
-.hero-content{
-  max-width:900px;
-  margin:auto;
-}
-
-.badge{
-  display:inline-block;
-  background:#22c55e;
-  color:black;
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:20px;
-}
-
-h1{
-  font-size:54px;
-  margin-bottom:20px;
-  font-weight:800;
+.hero h1{
+  font-size:36px;
 }
 
 .highlight{
   color:#22c55e;
 }
 
-.sub{
-  font-size:20px;
-  opacity:0.9;
-  margin-bottom:25px;
-}
-
-/* URGENCIA */
-.urgency{
-  font-size:14px;
-  color:#facc15;
-  margin-bottom:25px;
-}
-
-/* BOTONES */
-.buttons{
-  display:flex;
-  gap:15px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:30px;
-}
-
-.btn-main{
-  padding:18px 34px;
-  background:#22c55e;
-  color:black;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:800;
-  font-size:18px;
-  box-shadow:0 0 20px rgba(34,197,94,0.4);
-}
-
-.btn-secondary{
-  padding:14px 26px;
-  background:#1e293b;
-  color:white;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:600;
-}
-
-/* INPUT */
-.generator-box{
-  max-width:700px;
-  margin:20px auto;
-}
-
 textarea{
   width:100%;
-  min-height:130px;
-  border-radius:12px;
-  padding:16px;
+  max-width:600px;
+  height:120px;
+  padding:15px;
+  border-radius:10px;
+  border:none;
   font-size:16px;
-  border:1px solid #334155;
-  background:#0b1220;
-  color:white;
 }
 
-/* PRUEBA SOCIAL */
-.proof{
-  margin-top:20px;
+button{
+  margin-top:15px;
+  padding:16px 26px;
+  background:#22c55e;
+  color:black;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* CASOS */
+.casos{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.casos h2{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.casos p{
+  opacity:0.7;
+  margin-bottom:40px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  max-width:1000px;
+  margin:auto;
+}
+
+.card{
+  background:#0f172a;
+  border-radius:15px;
+  padding:25px;
+  transition:0.3s;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border:1px solid #22c55e;
+}
+
+.card h3{
+  margin-bottom:10px;
+}
+
+.card p{
   font-size:14px;
   opacity:0.8;
 }
 
-/* FOOTER */
-footer{
-  padding:40px;
-  text-align:center;
-  opacity:0.5;
+.card a{
+  display:inline-block;
+  margin-top:15px;
+  color:#22c55e;
+  text-decoration:none;
+  font-weight:bold;
 }
 </style>
+
 </head>
 
 <body>
 
+<!-- HERO -->
 <section class="hero">
-  <div class="hero-content">
+  <h1>Genera ingresos con IA <span class="highlight">sin saber programar</span></h1>
 
-    <!-- MICRO HOOK -->
-    <div class="badge">⚡ Nuevo sistema IA</div>
+  <p>Crea sistemas automáticos que trabajan por ti en minutos</p>
 
-    <!-- HEADLINE -->
-    <h1>
-      Genera ingresos con IA <span class="highlight">sin saber programar</span>
-    </h1>
+  <textarea placeholder="Ej: crear una web que genere ingresos con IA automáticamente..."></textarea>
 
-    <!-- SUBHEAD -->
-    <div class="sub">
-      Crea sistemas automáticos que trabajan por ti en minutos
+  <br>
+  <button onclick="generarWeb()">Generar Web</button>
+</section>
+
+<!-- CASOS REALES -->
+<section class="casos">
+  <h2>Casos reales del ecosistema</h2>
+  <p>Proyectos reales donde aplico automatización, SEO y monetización con IA</p>
+
+  <div class="grid">
+
+    <!-- AUTOMATIZA -->
+    <div class="card">
+      <h3>AutomatizaTuNegocio</h3>
+      <p>Proyecto enfocado en automatización de negocios con IA y herramientas SaaS.</p>
+      <a href="https://automatizatunegocio.org" target="_blank">Ver proyecto →</a>
     </div>
 
-    <!-- URGENCIA -->
-    <div class="urgency">
-      ⚠️ Acceso gratuito limitado hoy
+    <!-- GADGETSMANIA -->
+    <div class="card">
+      <h3>GadgetsMania</h3>
+      <p>Web de afiliación Amazon con estructura SEO y monetización optimizada.</p>
+      <a href="https://gadgetsmania.org" target="_blank">Ver proyecto →</a>
     </div>
 
-    <!-- CTA -->
-    <div class="buttons">
-
-      <a href="/demo.html" class="btn-main">
-        🚀 Crear mi sistema ahora
-      </a>
-
-      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-secondary">
-        Ver versión PRO
-      </a>
-
-    </div>
-
-    <!-- INPUT -->
-    <div class="generator-box">
-      <textarea placeholder="Ej: quiero crear un sistema que genere ingresos con IA automáticamente..."></textarea>
-    </div>
-
-    <!-- PRUEBA -->
-    <div class="proof">
-      Más de ideas y sistemas generados automáticamente con IA
+    <!-- VENDECONIA -->
+    <div class="card">
+      <h3>VendeconIA</h3>
+      <p>Ecosistema de contenido y monetización enfocado en generar ingresos con IA.</p>
+      <a href="https://vendeconia.org" target="_blank">Ver proyecto →</a>
     </div>
 
   </div>
 </section>
 
-<footer>
-  © 2026 SistemaMaestroIA
-</footer>
+<script src="app.js"></script>
 
 </body>
 </html>
