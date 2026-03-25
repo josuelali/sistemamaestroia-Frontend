@@ -1,0 +1,41 @@
+Listado de rutas de carpetas
+El número de serie del volumen es A6CD-2E19
+C:.
+│   .env
+│   .env.local
+│   .gitignore
+│   app.js
+│   demo.html
+│   favicon.ico
+│   gracias.html
+│   index.html
+│   lanzamiento.html
+│   LICENSE
+│   manifest.webmanifest
+│   README.md
+│   sitemap.xml
+│   style.css
+│   sw.js
+│   vercel.json
+│
+├───.vercel
+│   │   project.json
+│   │   README.txt
+│   │
+│   └───cache
+├───api
+│   │   generate.js
+│   │
+│   └───icons
+│           apple-touch-icon.png
+│           favicon.ico
+│           icon-192.png
+│           icon-512.png
+│
+├───assets
+├───public
+│       favicon.ico
+│       hero image.png
+│
+└───src
+        hero.tsx

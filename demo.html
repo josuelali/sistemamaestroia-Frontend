@@ -7,87 +7,832 @@
 <title>Crear sistema IA</title>
 
 <style>
+:root{
+  --bg-1:#040816;
+  --bg-2:#0a1120;
+  --bg-3:#0d1528;
+  --panel:#0f172a;
+  --panel-2:#111827;
+  --panel-3:#0b1220;
+  --border:rgba(255,255,255,.08);
+  --border-strong:rgba(255,255,255,.12);
+  --text:#ffffff;
+  --muted:#94a3b8;
+  --muted-2:#cbd5e1;
+  --green:#22c55e;
+  --green-hover:#16a34a;
+  --shadow:0 24px 70px rgba(0,0,0,.35);
+  --shadow-soft:0 10px 30px rgba(0,0,0,.22);
+  --radius:18px;
+  --container:1180px;
+  --max-form:760px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  font-family:Arial;
-  background:linear-gradient(180deg,#050A18,#0b1220);
-  color:white;
+  margin:0;
+  font-family:Arial, sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top center, rgba(34,197,94,.08), transparent 24%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2) 46%, var(--bg-3));
+}
+
+a{
+  color:inherit;
+}
+
+.page{
+  min-height:100vh;
+}
+
+.container{
+  width:min(var(--container), calc(100% - 32px));
+  margin:0 auto;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  padding:34px 0 26px;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:auto auto 18% -10%;
+  width:420px;
+  height:420px;
+  background:radial-gradient(circle, rgba(34,197,94,.08), transparent 70%);
+  filter:blur(18px);
+  pointer-events:none;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0 0 auto auto;
+  width:520px;
+  height:320px;
+  background:radial-gradient(circle, rgba(59,130,246,.08), transparent 68%);
+  filter:blur(18px);
+  pointer-events:none;
+}
+
+.hero__wrap{
+  position:relative;
+  z-index:2;
+  max-width:920px;
+  margin:0 auto;
   text-align:center;
-  padding:40px;
+}
+
+.hero__eyebrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:18px;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(15,23,42,.68);
+  color:var(--muted-2);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.02em;
+  box-shadow:var(--shadow-soft);
 }
 
 h1{
-  font-size:36px;
+  margin:0;
+  font-size:clamp(34px,4.8vw,66px);
+  line-height:1.04;
+  letter-spacing:-0.04em;
 }
 
 .highlight{
-  color:#22c55e;
+  color:var(--green);
+}
+
+.hero__sub{
+  margin:18px auto 0;
+  max-width:760px;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.65;
+}
+
+.hero__micro{
+  margin:14px auto 0;
+  max-width:680px;
+  color:#7dd3a4;
+  font-size:13px;
+  letter-spacing:.02em;
+}
+
+.hero__panel{
+  margin:34px auto 0;
+  max-width:var(--max-form);
+  padding:22px;
+  border-radius:24px;
+  border:1px solid rgba(255,255,255,.08);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)),
+    rgba(15,23,42,.66);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(10px);
+}
+
+.hero__form-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:16px;
+  text-align:left;
+}
+
+.hero__form-title{
+  margin:0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.hero__form-note{
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.5;
+}
+
+.hero__badge{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 12px;
+  border-radius:999px;
+  background:rgba(34,197,94,.12);
+  color:#a7f3d0;
+  border:1px solid rgba(34,197,94,.18);
+  font-size:12px;
+  font-weight:700;
+}
+
+.generator-card{
+  max-width:100%;
 }
 
 textarea{
   width:100%;
-  max-width:600px;
-  height:120px;
-  padding:15px;
-  border-radius:10px;
-  border:none;
+  min-height:148px;
+  padding:18px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#f8fafc;
+  color:#111827;
   font-size:16px;
+  resize:vertical;
+  outline:none;
+  box-shadow:0 16px 40px rgba(0,0,0,.18);
+}
+
+textarea:focus{
+  border-color:rgba(34,197,94,.42);
+  box-shadow:0 0 0 3px rgba(34,197,94,.08), 0 16px 40px rgba(0,0,0,.18);
+}
+
+.actions{
+  margin-top:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
 }
 
 button{
-  margin-top:15px;
-  padding:16px 26px;
-  background:#22c55e;
-  color:black;
+  padding:16px 30px;
+  background:var(--green);
+  color:#04110a;
   border:none;
-  border-radius:10px;
-  font-weight:bold;
+  border-radius:14px;
+  font-weight:700;
   font-size:16px;
   cursor:pointer;
+  transition:transform .18s ease, background .18s ease, box-shadow .18s ease;
+  box-shadow:0 14px 34px rgba(34,197,94,.2);
+}
+
+button:hover{
+  background:var(--green-hover);
+  transform:translateY(-1px);
+}
+
+button:active{
+  transform:translateY(0);
+}
+
+.hero__help{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.hero__examples{
+  margin-top:18px;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.hero__example{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.06);
+  color:#dbeafe;
+  font-size:13px;
+  line-height:1;
 }
 
 #output{
-  margin-top:30px;
-  max-width:700px;
+  margin-top:26px;
+  max-width:var(--max-form);
   margin-left:auto;
   margin-right:auto;
-  background:#111827;
-  padding:25px;
-  border-radius:12px;
+  background:rgba(17,24,39,.8);
+  border:1px solid var(--border);
+  padding:24px;
+  border-radius:18px;
   white-space:pre-wrap;
+  min-height:84px;
+  text-align:left;
+  box-shadow:var(--shadow-soft);
+  line-height:1.65;
+}
+
+#output:empty::before{
+  content:"Aquí aparecerá tu sistema generado...";
+  color:var(--muted);
+}
+
+#paywall{
+  max-width:var(--max-form);
+  margin:20px auto 0;
 }
 
 .paywall{
-  margin-top:30px;
-  padding:25px;
-  background:#111827;
-  border-radius:12px;
+  padding:28px;
+  background:rgba(17,24,39,.9);
+  border:1px solid rgba(34,197,94,.18);
+  border-radius:18px;
+  text-align:center;
+  box-shadow:var(--shadow-soft);
+}
+
+.paywall h2{
+  margin:0 0 10px;
+  font-size:30px;
+}
+
+.paywall p{
+  margin:0;
+  color:var(--muted);
+  font-size:16px;
+  line-height:1.6;
 }
 
 .paywall a{
-  display:inline-block;
-  margin-top:15px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-top:18px;
   padding:14px 20px;
-  background:#22c55e;
-  color:black;
-  border-radius:10px;
+  background:var(--green);
+  color:#04110a;
+  border-radius:12px;
   text-decoration:none;
-  font-weight:bold;
+  font-weight:700;
+  transition:transform .18s ease, background .18s ease;
+}
+
+.paywall a:hover{
+  background:var(--green-hover);
+  transform:translateY(-1px);
+}
+
+/* =========================
+   METRICS / VALUE STRIP
+========================= */
+
+.value-strip{
+  padding:10px 0 22px;
+}
+
+.value-strip__grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+}
+
+.value-card{
+  padding:18px;
+  border-radius:18px;
+  background:rgba(15,23,42,.62);
+  border:1px solid rgba(255,255,255,.06);
+  box-shadow:var(--shadow-soft);
+  text-align:left;
+}
+
+.value-card__label{
+  margin:0 0 8px;
+  color:var(--muted);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+
+.value-card__value{
+  margin:0;
+  font-size:24px;
+  font-weight:800;
+  letter-spacing:-0.03em;
+}
+
+.value-card__desc{
+  margin:8px 0 0;
+  color:#cbd5e1;
+  font-size:14px;
+  line-height:1.5;
+}
+
+/* =========================
+   ECOSYSTEM / CARRUSEL
+========================= */
+
+.ecosystem{
+  padding:42px 0 68px;
+}
+
+.ecosystem__panel{
+  background:linear-gradient(180deg, rgba(2,6,23,.32), rgba(2,6,23,.1));
+  border-top:1px solid rgba(255,255,255,.04);
+  border-bottom:1px solid rgba(255,255,255,.04);
+  padding:36px 0 42px;
+}
+
+.ecosystem__intro{
+  text-align:center;
+  max-width:860px;
+  margin:0 auto 30px;
+}
+
+.ecosystem__title{
+  margin:0 0 10px;
+  font-size:clamp(24px,3vw,36px);
+  line-height:1.1;
+  letter-spacing:-0.03em;
+}
+
+.ecosystem__text{
+  margin:0;
+  color:var(--muted);
+  font-size:15px;
+  line-height:1.7;
+}
+
+.logo-strip{
+  margin-top:24px;
+}
+
+.logo-strip__label{
+  margin:0 0 14px;
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:#cbd5e1;
+  opacity:.9;
+}
+
+.logo-strip__viewport{
+  overflow:hidden;
+  position:relative;
+  border-radius:20px;
+  border:1px solid rgba(255,255,255,.06);
+  background:rgba(15,23,42,.66);
+  box-shadow:var(--shadow);
+}
+
+.logo-strip__viewport::before,
+.logo-strip__viewport::after{
+  content:"";
+  position:absolute;
+  top:0;
+  width:92px;
+  height:100%;
+  z-index:2;
+  pointer-events:none;
+}
+
+.logo-strip__viewport::before{
+  left:0;
+  background:linear-gradient(to right, rgba(5,10,24,1), rgba(5,10,24,0));
+}
+
+.logo-strip__viewport::after{
+  right:0;
+  background:linear-gradient(to left, rgba(5,10,24,1), rgba(5,10,24,0));
+}
+
+.logo-track{
+  display:flex;
+  width:max-content;
+  gap:18px;
+  padding:18px;
+  animation:scroll-left 34s linear infinite;
+}
+
+.logo-track--slow{
+  animation-duration:40s;
+}
+
+.logo-strip__viewport:hover .logo-track{
+  animation-play-state:paused;
+}
+
+.logo-card{
+  flex:0 0 auto;
+  width:205px;
+  min-height:98px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  padding:16px 14px;
+  text-decoration:none;
+  color:var(--text);
+  background:rgba(17,24,39,.92);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:16px;
+  transition:transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.logo-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(34,197,94,.38);
+  background:rgba(17,24,39,1);
+}
+
+.logo-card--featured{
+  border-color:rgba(34,197,94,.28);
+  box-shadow:0 0 0 1px rgba(34,197,94,.08) inset;
+}
+
+.logo-card img{
+  width:auto;
+  max-width:150px;
+  max-height:42px;
+  object-fit:contain;
+  display:block;
+}
+
+.logo-card__name{
+  font-size:13px;
+  color:#cbd5e1;
+  line-height:1.2;
+  text-align:center;
+}
+
+@keyframes scroll-left{
+  from{ transform:translateX(0); }
+  to{ transform:translateX(-50%); }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 980px){
+  .value-strip__grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width: 860px){
+  .hero{
+    padding:24px 0 12px;
+  }
+
+  .hero__panel{
+    padding:18px;
+    border-radius:20px;
+  }
+
+  .hero__form-head{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .hero__badge{
+    align-self:flex-start;
+  }
+
+  textarea{
+    min-height:132px;
+  }
+
+  #output{
+    min-height:72px;
+  }
+
+  .logo-strip__viewport{
+    overflow-x:auto;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling:touch;
+    scroll-behavior:smooth;
+  }
+
+  .logo-strip__viewport::before,
+  .logo-strip__viewport::after{
+    display:none;
+  }
+
+  .logo-track,
+  .logo-track--slow{
+    animation:none;
+    padding:16px;
+  }
+
+  .logo-card{
+    width:172px;
+    min-height:88px;
+  }
+}
+
+@media (max-width: 560px){
+  .container{
+    width:min(var(--container), calc(100% - 20px));
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .hero__sub{
+    font-size:16px;
+  }
+
+  .hero__examples{
+    justify-content:flex-start;
+  }
+
+  .actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  button{
+    width:100%;
+  }
+
+  .hero__help{
+    text-align:center;
+  }
 }
 </style>
 </head>
 
 <body>
+<div class="page">
 
-<h1>
-  🚀 Genera un <span class="highlight">sistema de ingresos</span> con IA
-</h1>
+  <section class="hero">
+    <div class="container">
+      <div class="hero__wrap">
 
-<textarea id="prompt" placeholder="Ej: quiero automatizar mi negocio"></textarea><br>
+        <div class="hero__eyebrow">SistemaMaestroIA · Demo operativa</div>
 
-<button id="btn">Generar sistema</button>
+        <h1>
+          🚀 Genera un <span class="highlight">sistema de ingresos</span> con IA
+        </h1>
 
-<div id="output"></div>
-<div id="paywall"></div>
+        <p class="hero__sub">
+          Escribe lo que quieres montar y obtén una propuesta inicial de sistema, estructura y enfoque de monetización para arrancar más rápido.
+        </p>
+
+        <p class="hero__micro">
+          Pensado para proyectos digitales, automatización, captación y webs monetizables.
+        </p>
+
+        <div class="hero__panel">
+          <div class="hero__form-head">
+            <div>
+              <p class="hero__form-title">Describe tu idea</p>
+              <p class="hero__form-note">Cuanto más concreta sea la petición, más útil será la salida inicial del sistema.</p>
+            </div>
+            <div class="hero__badge">3 usos gratuitos</div>
+          </div>
+
+          <div class="generator-card">
+            <textarea id="prompt" placeholder="Ej: quiero automatizar mi negocio y crear una web que genere ingresos con afiliación y contenido SEO"></textarea>
+
+            <div class="actions">
+              <button id="btn">Generar sistema</button>
+              <span class="hero__help">Respuesta inicial instantánea</span>
+            </div>
+          </div>
+
+          <div class="hero__examples">
+            <span class="hero__example">Automatizar un negocio local</span>
+            <span class="hero__example">Crear una web monetizable</span>
+            <span class="hero__example">Montar un sistema SaaS</span>
+          </div>
+        </div>
+
+        <div id="output"></div>
+        <div id="paywall"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="value-strip">
+    <div class="container">
+      <div class="value-strip__grid">
+        <div class="value-card">
+          <p class="value-card__label">Salida</p>
+          <p class="value-card__value">Sistema inicial</p>
+          <p class="value-card__desc">Recibes una propuesta base para estructurar tu idea y convertirla en un sistema ejecutable.</p>
+        </div>
+
+        <div class="value-card">
+          <p class="value-card__label">Enfoque</p>
+          <p class="value-card__value">Monetización</p>
+          <p class="value-card__desc">Pensado para afiliación, captación, automatización y creación de activos digitales rentables.</p>
+        </div>
+
+        <div class="value-card">
+          <p class="value-card__label">Objetivo</p>
+          <p class="value-card__value">Velocidad</p>
+          <p class="value-card__desc">Reducir fricción inicial y pasar antes de la idea a una estructura clara con dirección práctica.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ecosystem">
+    <div class="ecosystem__panel">
+      <div class="container">
+
+        <div class="ecosystem__intro">
+          <h2 class="ecosystem__title">Ecosistema y herramientas conectadas</h2>
+          <p class="ecosystem__text">
+            Accesos rápidos a sus proyectos principales y a las herramientas que apoyan la monetización, la infraestructura y la producción de contenido.
+          </p>
+        </div>
+
+        <div class="logo-strip">
+          <p class="logo-strip__label">Mis proyectos</p>
+
+          <div class="logo-strip__viewport">
+            <div class="logo-track">
+
+              <a href="https://vendeconia.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-vendeconia.png" alt="VendeConIA">
+                <span class="logo-card__name">VendeConIA</span>
+              </a>
+
+              <a href="https://sistemamaestroia.com" target="_blank" rel="noopener noreferrer" class="logo-card logo-card--featured">
+                <img src="/logos/logo-sistemamaestroia.png" alt="SistemaMaestroIA">
+                <span class="logo-card__name">SistemaMaestroIA</span>
+              </a>
+
+              <a href="https://infovendeconia.com" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-infovendeconia.png" alt="InfoVendeConIA">
+                <span class="logo-card__name">InfoVendeConIA</span>
+              </a>
+
+              <a href="https://automatizatunegocio.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-automatizatunegocio.png" alt="AutomatizaTuNegocio">
+                <span class="logo-card__name">AutomatizaTuNegocio</span>
+              </a>
+
+              <a href="https://gadgetsmania.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-gadgetsmania.png" alt="Gadgetsmania">
+                <span class="logo-card__name">Gadgetsmania</span>
+              </a>
+
+              <a href="https://vendeconia.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-vendeconia.png" alt="VendeConIA">
+                <span class="logo-card__name">VendeConIA</span>
+              </a>
+
+              <a href="https://sistemamaestroia.com" target="_blank" rel="noopener noreferrer" class="logo-card logo-card--featured">
+                <img src="/logos/logo-sistemamaestroia.png" alt="SistemaMaestroIA">
+                <span class="logo-card__name">SistemaMaestroIA</span>
+              </a>
+
+              <a href="https://infovendeconia.com" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-infovendeconia.png" alt="InfoVendeConIA">
+                <span class="logo-card__name">InfoVendeConIA</span>
+              </a>
+
+              <a href="https://automatizatunegocio.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-automatizatunegocio.png" alt="AutomatizaTuNegocio">
+                <span class="logo-card__name">AutomatizaTuNegocio</span>
+              </a>
+
+              <a href="https://gadgetsmania.org" target="_blank" rel="noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-gadgetsmania.png" alt="Gadgetsmania">
+                <span class="logo-card__name">Gadgetsmania</span>
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="logo-strip">
+          <p class="logo-strip__label">Herramientas recomendadas</p>
+
+          <div class="logo-strip__viewport">
+            <div class="logo-track logo-track--slow">
+
+              <a href="https://systeme.io/?sa=sa0265622982c7f37465c7b29f0138ab412c445b08" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-systeme.png" alt="Systeme.io">
+                <span class="logo-card__name">Systeme.io</span>
+              </a>
+
+              <a href="https://www.hostinger.es" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-hostinger.png" alt="Hostinger">
+                <span class="logo-card__name">Hostinger</span>
+              </a>
+
+              <a href="https://pictory.ai" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-pictory.png" alt="Pictory">
+                <span class="logo-card__name">Pictory</span>
+              </a>
+
+              <a href="https://writesonic.com" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-writesonic.png" alt="Writesonic">
+                <span class="logo-card__name">Writesonic</span>
+              </a>
+
+              <a href="https://www.amazon.es/?tag=vendeconia-21" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-amazon.png" alt="Amazon">
+                <span class="logo-card__name">Amazon</span>
+              </a>
+
+              <a href="https://systeme.io/?sa=sa0265622982c7f37465c7b29f0138ab412c445b08" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-systeme.png" alt="Systeme.io">
+                <span class="logo-card__name">Systeme.io</span>
+              </a>
+
+              <a href="https://www.hostinger.es" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-hostinger.png" alt="Hostinger">
+                <span class="logo-card__name">Hostinger</span>
+              </a>
+
+              <a href="https://pictory.ai" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-pictory.png" alt="Pictory">
+                <span class="logo-card__name">Pictory</span>
+              </a>
+
+              <a href="https://writesonic.com" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-writesonic.png" alt="Writesonic">
+                <span class="logo-card__name">Writesonic</span>
+              </a>
+
+              <a href="https://www.amazon.es/?tag=vendeconia-21" target="_blank" rel="nofollow noopener noreferrer" class="logo-card">
+                <img src="/logos/logo-amazon.png" alt="Amazon">
+                <span class="logo-card__name">Amazon</span>
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
 
 <script>
 let usos = localStorage.getItem("usos") || 0;
@@ -96,18 +841,21 @@ usos = parseInt(usos);
 const MAX = 3;
 
 document.getElementById("btn").addEventListener("click", async () => {
-
   if (usos >= MAX) {
     showPaywall();
     return;
   }
 
-  const prompt = document.getElementById("prompt").value;
+  const prompt = document.getElementById("prompt").value.trim();
+
+  if (!prompt) {
+    document.getElementById("output").innerText = "Escribe una idea antes de generar.";
+    return;
+  }
 
   document.getElementById("output").innerText = "Generando...";
 
   try {
-
     const res = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -121,7 +869,7 @@ document.getElementById("btn").addEventListener("click", async () => {
     usos++;
     localStorage.setItem("usos", usos);
 
-    document.getElementById("output").innerText = data.result;
+    document.getElementById("output").innerText = data.result || "No se recibió respuesta.";
 
     if (usos >= MAX) {
       showPaywall();
@@ -130,16 +878,14 @@ document.getElementById("btn").addEventListener("click", async () => {
   } catch (e) {
     document.getElementById("output").innerText = "Error IA";
   }
-
 });
 
 function showPaywall(){
   document.getElementById("paywall").innerHTML = `
     <div class="paywall">
       <h2>🚫 Has llegado al límite</h2>
-      <p>Desbloquea generación ilimitada</p>
-
-      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01">
+      <p>Desbloquea generación ilimitada y acceso completo a tu sistema.</p>
+      <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" target="_blank" rel="noopener noreferrer">
         🔓 Activar PRO
       </a>
     </div>
