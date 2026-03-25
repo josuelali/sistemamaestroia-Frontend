@@ -1,190 +1,190 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Sistema Maestro IA</title>
-<meta name="description" content="Sistema Maestro IA – Orquesta asistentes IA con arquitectura jerárquica profesional.">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-
-<style>
-body{
-margin:0;
-font-family:'Inter',sans-serif;
-background:#060B1A;
-color:white;
-}
-
-.hero{
-position:relative;
-text-align:center;
-padding:120px 20px;
-background-image:url('./hero-image.png');
-background-position:center;
-background-size:cover;
-background-repeat:no-repeat;
-}
-
-.hero-overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,0.55);
-}
-
-.hero-content{
-position:relative;
-z-index:2;
-max-width:900px;
-margin:auto;
-}
-
-h1{
-font-size:48px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:20px;
-opacity:0.9;
-}
-
-.buttons{
-display:flex;
-flex-wrap:wrap;
-gap:15px;
-justify-content:center;
-margin-top:30px;
-}
-
-.btn-pro{
-padding:16px 30px;
-background:#22c55e;
-color:white;
-border-radius:10px;
-text-decoration:none;
-font-weight:700;
-font-size:18px;
-min-width:230px;
-text-align:center;
-}
-
-.btn-demo{
-padding:14px 26px;
-background:#38bdf8;
-color:#060B1A;
-border-radius:10px;
-text-decoration:none;
-font-weight:700;
-min-width:200px;
-text-align:center;
-}
-
-.section-dark{
-background:#0b1220;
-padding:80px 20px;
-text-align:center;
-}
-
-.projects{
-display:flex;
-flex-wrap:wrap;
-gap:25px;
-justify-content:center;
-margin-top:40px;
-}
-
-.project-card{
-background:#111827;
-padding:30px;
-border-radius:12px;
-width:280px;
-}
-
-.project-card h3{
-margin-bottom:10px;
-}
-
-.project-card a{
-color:#38bdf8;
-font-weight:bold;
-text-decoration:none;
-}
-
-footer{
-padding:40px 20px;
-text-align:center;
-opacity:0.6;
-font-size:14px;
-}
-
-@media(max-width:768px){
-h1{
-font-size:34px;
-}
-.hero{
-padding:100px 15px;
-}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sistema Maestro IA</title>
+  <meta name="description" content="Crea sistemas automáticos con IA para generar ingresos, contenido y proyectos digitales sin saber programar.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/favicon.ico">
 </head>
-
 <body>
 
-<section class="hero">
-<div class="hero-overlay"></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-pill">Sistema Maestro IA</div>
+    </div>
+  </header>
 
-<div class="hero-content">
-<h1>Sistema Maestro IA</h1>
-<p>Crea y orquesta asistentes IA con arquitectura jerárquica profesional.</p>
+  <main>
 
-<div class="buttons">
-<a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn-pro">🚀 Activar Plan PRO</a>
-<a href="/demo/" class="btn-demo">Probar Demo</a>
-</div>
+    <section class="hero">
+      <div class="hero-overlay"></div>
 
-</div>
-</section>
+      <div class="container hero-shell">
+        <div class="hero-visual">
+          <img src=C:\Users\user\Desktop\PROYECTOS_ACTIVOS\WEBS\sistemamaestroia-Frontend\hero-image.gif
+          <div class="hero-glow"></div>
+        </div>
 
-<section class="section-dark">
-<h2>Orquesta asistentes con control total</h2>
-<p>Versionado, logs completos, rollback y ejecución controlada.</p>
-</section>
+        <div class="hero-copy">
+          <span class="mini-badge">Automatización + IA + monetización</span>
 
-<section class="section-dark">
-<h2>Nuestros Proyectos</h2>
-<p>Ecosistema digital orientado a automatización, monetización y generación de ingresos con IA.</p>
+          <h1>
+            Genera ingresos con IA <span class="highlight">sin saber programar</span>
+          </h1>
 
-<div class="projects">
+          <p class="subtitle">
+            Crea sistemas automáticos que trabajan por ti para generar contenido, captar tráfico y monetizar proyectos digitales.
+          </p>
 
-<div class="project-card">
-<h3>VendeConIA</h3>
-<p>Aprende a generar ingresos online usando inteligencia artificial.</p>
-<a href="https://vendeconia.org" target="_blank">Visitar →</a>
-</div>
+          <div class="hero-generator">
+            <textarea id="prompt" placeholder="Ej: quiero crear una web que genere ingresos con IA automáticamente, con artículos, afiliados y sistema de captación..."></textarea>
+            <button class="btn btn-primary large" onclick="generarWeb()">Generar Web</button>
+          </div>
 
-<div class="project-card">
-<h3>InfoVendeConIA</h3>
-<p>Guías prácticas sobre herramientas, automatización y monetización digital.</p>
-<a href="https://infovendeconia.com" target="_blank">Visitar →</a>
-</div>
+          <p class="micro-trust">
+            Más ideas, sistemas y estructura aplicados directamente a proyectos reales del ecosistema.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<div class="project-card">
-<h3>AutomatizaTuNegocio</h3>
-<p>Automatizaciones simples para ahorrar tiempo en negocios reales.</p>
-<a href="https://automatizatunegocio.org" target="_blank">Visitar →</a>
-</div>
+    <section class="partners">
+      <div class="container">
+        <div class="section-head">
+          <h2>Herramientas y programas recomendados</h2>
+          <p>
+            Recursos que encajan con una estrategia real de automatización, contenido y monetización.
+          </p>
+        </div>
 
-</div>
-</section>
+        <div class="partners-grid">
+          <a class="partner-card" href="#" target="_blank" rel="noopener noreferrer">
+            <span class="sa0265622982c7f37465c7b29f0138ab412c445b08">Afiliación SaaS</span>
+            <h3>Systeme.io</h3>
+            <p>Captación, funnels y automatización comercial para proyectos digitales.</p>
+          </a>
 
-<footer>
-© 2026 SistemaMaestroIA
-</footer>
+          <a class="partner-card" href="https://www.hostinger.com/es?REFERRALCODE=DZOJOSUECS4D" target="_blank" rel="noopener noreferrer">
+            <span class="partner-tag">Hosting</span>
+            <h3>Hostinger</h3>
+            <p>Infraestructura simple y rápida para lanzar webs y landings monetizables.</p>
+          </a>
 
-<script src="app.js"></script>
+          <a class="partner-card" href="https://pictory.ai?ref=joshue-cabello-rosa72" target="_blank" rel="noopener noreferrer">
+            <span class="partner-tag">Vídeo IA</span>
+            <h3>Pictory</h3>
+            <p>Creación rápida de vídeos a partir de ideas, artículos y contenido automatizado.</p>
+          </a>
 
+          <a class="partner-card" href="#" target="_blank" rel="noopener noreferrer">
+            <span class="partner-tag">Copy IA</span>
+            <h3>Writesonic</h3>
+            <p>Apoyo para redacción, research y producción de contenido comercial.</p>
+          </a>
 
+          <a class="partner-card" href="https://amzn.to/4lRk4Do"target="_blank" rel="noopener noreferrer">
+            <span class="vendeconia-21">Afiliación</span>
+            <h3>Amazon</h3>
+            <p>Monetización complementaria para nichos, comparativas y contenidos evergreen.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cases">
+      <div class="container">
+        <div class="section-head">
+          <h2>Casos reales del ecosistema</h2>
+          <p>
+            Proyectos reales donde aplico automatización, SEO, monetización y estructura orientada a ingresos.
+          </p>
+        </div>
+
+        <div class="cases-grid">
+          <article class="case-card">
+            <div class="case-top">
+              <span class="case-label">Automatización</span>
+              <h3>AutomatizaTuNegocio</h3>
+            </div>
+            <p>
+              Proyecto enfocado en automatización de negocios con IA y herramientas SaaS con intención comercial clara.
+            </p>
+            <a href="https://automatizatunegocio.org" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-top">
+              <span class="case-label">Afiliación</span>
+              <h3>GadgetsMania</h3>
+            </div>
+            <p>
+              Web de afiliación con estructura SEO y monetización orientada a productos y contenido comparativo.
+            </p>
+            <a href="https://gadgetsmania.org" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+          </article>
+
+          <article class="case-card">
+            <div class="case-top">
+              <span class="case-label">Ecosistema</span>
+              <h3>VendeconIA</h3>
+            </div>
+            <p>
+              Proyecto orientado a generar ingresos con IA mediante contenido, automatización y captación de oportunidades.
+            </p>
+            <a href="https://vendeconia.org" target="_blank" rel="noopener noreferrer">Ver proyecto →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+
+      <div class="footer-col">
+        <h4>Sistema Maestro IA</h4>
+        <p>
+          Estructura para crear proyectos digitales con IA, automatización, monetización y enfoque real en ingresos.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="demo.html">Demo</a></li>
+          <li><a href="lanzamiento.html">Lanzamiento</a></li>
+          <li><a href="gracias.html">Acceso</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contacto y soporte</h4>
+        <ul>
+          <li><a href="mailto:josuecabellorosa83@gmail.com">Contacto</a></li>
+          <li><a href="#">Suscripción</a></li>
+          <li><a href="#">Ayuda</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Aviso legal</a></li>
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Cookies</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© 2026 Sistema Maestro IA · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
