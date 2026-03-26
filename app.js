@@ -1,4 +1,4 @@
-async function generarWeb() {
+window.generarWeb = async function () {
   const textarea = document.getElementById("prompt");
   const resultado = document.getElementById("resultado");
 
@@ -42,4 +42,4 @@ async function generarWeb() {
     console.error(err);
     resultado.textContent = "Error de conexión con la IA.";
   }
-}
+};
