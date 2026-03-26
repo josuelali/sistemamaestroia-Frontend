@@ -211,6 +211,22 @@ a{
   box-shadow:0 12px 30px rgba(34,197,94,.22);
 }
 
+.btn-blue {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-blue:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+}
+
 .large{
   min-height:52px;
 }
