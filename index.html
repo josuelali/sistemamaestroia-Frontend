@@ -1,205 +1,253 @@
 <!doctype html>
 <html lang="es">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-N28W4CVJ');</script>
-<!-- End Google Tag Manager -->
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Sistema Maestro IA</title>
-<meta name="description" content="Crea sistemas automáticos con IA para generar ingresos, contenido y proyectos digitales sin saber programar.">
 
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="assets/favicon.ico">
 
 <style>
-/* MATRIX FONDO */
+
+/* =========================
+FONDO PREMIUM
+========================= */
+body {
+  margin: 0;
+  font-family: Arial;
+  background: radial-gradient(circle at top, #020617, #000000);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* MATRIX SUAVE */
 #matrix {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  opacity: 0.07;
   z-index: 0;
-  opacity: 0.18; /* suave, no molesta */
 }
 
-/* asegurar que el contenido va por encima */
-body, header, main, footer {
+/* =========================
+HERO PREMIUM
+========================= */
+.hero {
   position: relative;
+  padding: 120px 20px;
+  text-align: center;
   z-index: 1;
 }
+
+/* overlay profundidad */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.3), rgba(0,0,0,0.9));
+  z-index: -1;
+}
+
+/* logo */
+.hero-image {
+  width: 260px;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 25px rgba(0,150,255,0.5));
+}
+
+/* badge */
+.mini-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.05);
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+/* título */
+h1 {
+  font-size: 42px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  text-shadow: 0 0 20px rgba(0,255,150,0.3);
+}
+
+.highlight {
+  color: #00ff99;
+  text-shadow: 0 0 25px rgba(0,255,150,0.9);
+}
+
+/* subtítulo */
+.subtitle {
+  color: #aaa;
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 30px;
+}
+
+/* =========================
+BOTONES PREMIUM
+========================= */
+.hero-cta {
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 16px 28px;
+  border-radius: 12px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+/* primario */
+.btn-primary {
+  background: linear-gradient(45deg, #6a00ff, #00c3ff);
+  box-shadow: 0 0 25px rgba(0,150,255,0.5);
+}
+
+/* secundario */
+.btn-blue {
+  background: linear-gradient(45deg, #00ff99, #00c3ff);
+  box-shadow: 0 0 25px rgba(0,255,150,0.4);
+}
+
+/* hover */
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 50px rgba(0,150,255,0.9);
+}
+
+/* micro trust */
+.micro-trust {
+  margin-top: 15px;
+  color: #888;
+  font-size: 13px;
+}
+
+/* =========================
+AFILIADOS PREMIUM
+========================= */
+.partners {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.partners-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.partner-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 15px;
+  padding: 20px;
+  width: 220px;
+  transition: 0.3s;
+  text-decoration: none;
+  color: white;
+}
+
+.partner-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 0 30px rgba(0,255,150,0.2);
+}
+
+/* =========================
+FOOTER
+========================= */
+footer {
+  padding: 40px;
+  text-align: center;
+  color: #777;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N28W4CVJ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
 <canvas id="matrix"></canvas>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="brand-pill">Sistema Maestro IA</div>
-  </div>
-</header>
-
-<main>
-
 <section class="hero">
-  <div class="hero-overlay"></div>
 
-  <div class="container hero-shell">
-    <div class="hero-visual">
-      <img src="hero-image.gif" alt="Sistema Maestro IA" class="hero-image">
-      <div class="hero-glow"></div>
-    </div>
+<img src="hero-image.gif" class="hero-image">
 
-    <div class="hero-copy">
-      <span class="mini-badge">Automatización + IA + monetización</span>
+<span class="mini-badge">Automatización + IA + monetización</span>
 
-      <h1>
-        Genera ingresos con IA <span class="highlight">sin saber programar</span>
-      </h1>
+<h1>
+Genera ingresos con IA <span class="highlight">sin saber programar</span>
+</h1>
 
-      <p class="subtitle">
-        Crea sistemas automáticos que trabajan por ti para generar contenido, captar tráfico y monetizar proyectos digitales.
-      </p>
+<p class="subtitle">
+Crea sistemas automáticos que trabajan por ti para generar contenido, captar tráfico y monetizar proyectos digitales.
+</p>
 
-      <div class="hero-cta">
-        <a href="/demo.html" class="btn btn-primary large">
-          Prueba Gratis
-        </a>
+<div class="hero-cta">
+<a href="/demo.html" class="btn btn-primary">
+Probar gratis
+</a>
 
-        <a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn btn-blue large">
-          🚀 Activar Plan PRO (19,99€ lanzamiento)
-        </a>
-      </div>
+<a href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" class="btn btn-blue">
+🚀 Activar PRO
+</a>
+</div>
 
-      <p class="micro-trust">
-        Más ideas, sistemas y estructura aplicados directamente a proyectos reales del ecosistema.
-      </p>
-    </div>
-  </div>
+<p class="micro-trust">
++ sistemas reales funcionando en producción
+</p>
+
 </section>
 
 <section class="partners">
-  <div class="container">
-    <div class="section-head">
-      <h2>Herramientas y programas recomendados</h2>
-      <p>
-        Recursos que encajan con una estrategia real de automatización, contenido y monetización.
-      </p>
-    </div>
 
-    <div class="partners-grid">
+<h2>Herramientas recomendadas</h2>
 
-      <a class="partner-card" href="#" target="_blank">
-        <span>Afiliación SaaS</span>
-        <h3>Systeme.io</h3>
-        <p>Captación, funnels y automatización comercial.</p>
-      </a>
+<div class="partners-grid">
 
-      <a class="partner-card" href="https://www.hostinger.com/es?REFERRALCODE=DZOJOSUECS4D" target="_blank">
-        <span class="partner-tag">Hosting</span>
-        <h3>Hostinger</h3>
-        <p>Infraestructura rápida para lanzar webs.</p>
-      </a>
+<a href="https://www.hostinger.com/es?REFERRALCODE=DZOJOSUECS4D" class="partner-card" target="_blank">
+<h3>Hostinger</h3>
+<p>Hosting rápido</p>
+</a>
 
-      <a class="partner-card" href="https://pictory.ai?ref=joshue-cabello-rosa72" target="_blank">
-        <span class="partner-tag">Vídeo IA</span>
-        <h3>Pictory</h3>
-        <p>Creación automática de vídeos.</p>
-      </a>
+<a href="https://pictory.ai?ref=joshue-cabello-rosa72" class="partner-card" target="_blank">
+<h3>Pictory</h3>
+<p>Vídeo IA</p>
+</a>
 
-      <a class="partner-card" href="#" target="_blank">
-        <span class="partner-tag">Copy IA</span>
-        <h3>Writesonic</h3>
-        <p>Redacción y contenido IA.</p>
-      </a>
+<a href="https://josuecabellorosa83.systeme.io/30a703c4" class="partner-card" target="_blank">
+<h3>Systeme</h3>
+<p>Funnels</p>
+</a>
 
-      <a class="partner-card" href="https://amzn.to/4lRk4Do" target="_blank">
-        <span>Afiliación</span>
-        <h3>Amazon</h3>
-        <p>Monetización evergreen.</p>
-      </a>
+<a href="https://amzn.to/4lRk4Do" class="partner-card" target="_blank">
+<h3>Amazon</h3>
+<p>Afiliación</p>
+</a>
 
-    </div>
-  </div>
+</div>
+
 </section>
 
-<section class="cases">
-  <div class="container">
-    <div class="section-head">
-      <h2>Casos reales del ecosistema</h2>
-    </div>
-
-    <div class="cases-grid">
-
-      <article class="case-card">
-        <h3>AutomatizaTuNegocio</h3>
-        <a href="https://automatizatunegocio.org" target="_blank">Ver proyecto →</a>
-      </article>
-
-      <article class="case-card">
-        <h3>GadgetsMania</h3>
-        <a href="https://gadgetsmania.org" target="_blank">Ver proyecto →</a>
-      </article>
-
-      <article class="case-card">
-        <h3>VendeconIA</h3>
-        <a href="https://vendeconia.org" target="_blank">Ver proyecto →</a>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-grid">
-
-    <div class="footer-col">
-      <h4>Sistema Maestro IA</h4>
-      <p>Estructura para crear proyectos digitales con IA.</p>
-    </div>
-
-    <div class="footer-col">
-      <h4>Navegación</h4>
-      <ul>
-        <li><a href="demo.html">Demo</a></li>
-        <li><a href="lanzamiento.html">Lanzamiento</a></li>
-        <li><a href="gracias.html">Acceso</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contacto</h4>
-      <ul>
-        <li><a href="mailto:josuecabellorosa83@gmail.com">Email</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="container footer-bottom">
-    <p>© 2026 Sistema Maestro IA</p>
-  </div>
+<footer>
+© Sistema Maestro IA
 </footer>
 
-<!-- MATRIX SCRIPT -->
 <script>
+
+/* MATRIX PREMIUM */
 const canvas = document.getElementById("matrix");
 const ctx = canvas.getContext("2d");
 
@@ -212,24 +260,21 @@ const columns = canvas.width / fontSize;
 
 const drops = [];
 
-for (let i = 0; i < columns; i++) {
-  drops[i] = 1;
-}
+for (let i = 0; i < columns; i++) drops[i] = 1;
 
 function draw() {
   ctx.fillStyle = "rgba(0,0,0,0.05)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.fillStyle = "#00ff88";
+  ctx.fillStyle = "#00ff99";
   ctx.font = fontSize + "px monospace";
 
   for (let i = 0; i < drops.length; i++) {
     const text = letters[Math.floor(Math.random() * letters.length)];
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
       drops[i] = 0;
-    }
 
     drops[i]++;
   }
@@ -237,11 +282,6 @@ function draw() {
 
 setInterval(draw, 33);
 
-// responsive
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
 </script>
 
 </body>
