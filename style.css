@@ -20,6 +20,14 @@ html{
   scroll-behavior:smooth;
 }
 
+/* MATRIX */
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
 body{
   margin:0;
   font-family:Inter, Arial, sans-serif;
