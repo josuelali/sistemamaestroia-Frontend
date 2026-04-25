@@ -1,20 +1,23 @@
 ﻿{
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/generate",
-      "destination": "https://systema-maestro-backend.onrender.com/generate"
+      "handle": "filesystem"
     },
     {
-      "source": "/api/run",
-      "destination": "https://systema-maestro-backend.onrender.com/api/run"
+      "src": "/api/generate",
+      "dest": "https://systema-maestro-backend.onrender.com/generate"
     },
     {
-      "source": "/asistentes",
-      "destination": "/asistentes.html"
+      "src": "/api/run",
+      "dest": "https://systema-maestro-backend.onrender.com/api/run"
     },
     {
-      "source": "/asistentes/:path*",
-      "destination": "/asistentes.html"
+      "src": "/asistentes",
+      "dest": "/asistentes.html"
+    },
+    {
+      "src": "/asistentes/(.*)",
+      "dest": "/asistentes.html"
     }
   ]
 }
