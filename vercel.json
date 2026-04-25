@@ -1,9 +1,23 @@
 {
   "routes": [
-    { "handle": "filesystem" },
+    {
+      "handle": "filesystem"
+    },
     {
       "src": "/api/generate",
       "dest": "https://systema-maestro-backend.onrender.com/generate"
+    },
+    {
+      "src": "/api/run",
+      "dest": "https://systema-maestro-backend.onrender.com/api/run"
+    },
+    {
+      "src": "/asistentes",
+      "dest": "/asistentes.html"
+    },
+    {
+      "src": "/asistentes/(.*)",
+      "dest": "/asistentes.html"
     }
   ]
 }
