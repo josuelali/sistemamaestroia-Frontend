@@ -447,7 +447,7 @@
         result.textContent = "Generando respuesta con Sistema Maestro IA...";
 
         try {
-          const response = await fetch("/api/run", {
+          const response = await fetch("https://systema-maestro-backend.onrender.com/api/run", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
