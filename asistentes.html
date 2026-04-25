@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asistentes IA | Sistema Maestro IA</title>
+  <meta name="description" content="Asistentes de IA para crear ofertas, landings, anuncios, emails, SEO, automatizaciones y validar ideas monetizables." />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    body {
+      background: #05070d;
+      color: #ffffff;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+    }
+
+    .hub-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    .hub-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .hub-logo {
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .hub-back {
+      color: #a7b0c0;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .hub-hero {
+      text-align: center;
+      margin-bottom: 42px;
+    }
+
+    .hub-badge {
+      display: inline-flex;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      color: #9fd4ff;
+      background: rgba(66,153,225,.08);
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hub-hero h1 {
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 1.02;
+      margin: 0 0 18px;
+      letter-spacing: -0.06em;
+    }
+
+    .hub-hero p {
+      color: #a7b0c0;
+      font-size: 18px;
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .assistants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .assistant-card {
+      border: 1px solid rgba(255,255,255,.1);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
+      border-radius: 22px;
+      padding: 22px;
+      min-height: 190px;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .assistant-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(95, 179, 255, .45);
+      background: linear-gradient(180deg, rgba(95,179,255,.12), rgba(255,255,255,.03));
+    }
+
+    .assistant-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: rgba(95,179,255,.12);
+      margin-bottom: 16px;
+      font-size: 22px;
+    }
+
+    .assistant-card h2 {
+      font-size: 19px;
+      margin: 0 0 10px;
+    }
+
+    .assistant-card p {
+      color: #a7b0c0;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .assistant-panel {
+      display: none;
+      max-width: 850px;
+      margin: 32px auto 0;
+      border: 1px solid rgba(255,255,255,.11);
+      background: rgba(255,255,255,.045);
+      border-radius: 26px;
+      padding: 26px;
+    }
+
+    .assistant-panel.active {
+      display: block;
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+
+    .panel-top h2 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      letter-spacing: -0.04em;
+    }
+
+    .panel-top p {
+      margin: 0;
+      color: #a7b0c0;
+      line-height: 1.5;
+    }
+
+    .close-btn {
+      border: 1px solid rgba(255,255,255,.12);
+      background: transparent;
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 13px;
+      cursor: pointer;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      color: #eaf2ff;
+      font-weight: 650;
+      font-size: 14px;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.26);
+      color: white;
+      border-radius: 14px;
+      padding: 13px 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    .field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .generate-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 16px;
+      padding: 15px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #06111f;
+      background: linear-gradient(90deg, #72d6ff, #9dffb3);
+      margin-top: 8px;
+    }
+
+    .generate-btn:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .result {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.1);
+      white-space: pre-wrap;
+      line-height: 1.6;
+      color: #e8eef7;
+    }
+
+    .result.active {
+      display: block;
+    }
+
+    .hub-note {
+      margin-top: 26px;
+      color: #7f8ca3;
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <main class="hub-wrap">
+    <header class="hub-header">
+      <a href="/" class="hub-logo">Sistema Maestro IA</a>
+      <a href="/" class="hub-back">← Volver al inicio</a>
+    </header>
+
+    <section class="hub-hero">
+      <span class="hub-badge">Assistance Hub MVP</span>
+      <h1>Asistentes IA para crear, vender y automatizar</h1>
+      <p>
+        Elige un asistente, rellena un formulario simple y genera una salida lista para usar:
+        ofertas, landings, anuncios, emails, SEO, automatizaciones y validación de ideas.
+      </p>
+    </section>
+
+    <section id="grid" class="assistants-grid"></section>
+
+    <section id="panel" class="assistant-panel"></section>
+
+    <p class="hub-note">
+      MVP conectado a Sistema Maestro IA. Los resultados dependen de la configuración del backend.
+    </p>
+  </main>
+
+  <script>
+    const assistants = [
+      {
+        id: "oferta",
+        slug: "oferta",
+        icon: "💎",
+        name: "Creador de Oferta Irresistible",
+        description: "Convierte tu producto en una oferta clara, vendible y difícil de rechazar.",
+        fields: [
+          { name: "producto", label: "¿Qué vendes?", type: "textarea" },
+          { name: "cliente_ideal", label: "¿A quién se lo vendes?", type: "textarea" },
+          { name: "precio", label: "Precio aproximado o rango", type: "text" }
+        ]
+      },
+      {
+        id: "landing",
+        slug: "landing",
+        icon: "🧲",
+        name: "Landing que Convierte",
+        description: "Genera la estructura y copy completo de una landing enfocada en conversión.",
+        fields: [
+          { name: "producto", label: "Producto o servicio", type: "textarea" },
+          { name: "audiencia", label: "Cliente objetivo", type: "textarea" },
+          { name: "objetivo", label: "Objetivo de la landing", type: "text" }
+        ]
+      },
+      {
+        id: "anuncios",
+        slug: "anuncios",
+        icon: "📣",
+        name: "Anuncios Meta/TikTok",
+        description: "Crea variantes de anuncios con ángulos, hooks y llamadas a la acción.",
+        fields: [
+          { name: "producto", label: "Producto o servicio", type: "textarea" },
+          { name: "beneficio", label: "Beneficio principal", type: "textarea" },
+          { name: "plataforma", label: "Meta, TikTok o ambas", type: "text" }
+        ]
+      },
+      {
+        id: "emails",
+        slug: "emails",
+        icon: "✉️",
+        name: "Secuencia de Emails de Venta",
+        description: "Genera una secuencia de 3 a 5 emails para vender de forma natural.",
+        fields: [
+          { name: "producto", label: "Producto o servicio", type: "textarea" },
+          { name: "audiencia", label: "Audiencia", type: "textarea" },
+          { name: "objetivo", label: "Objetivo de la secuencia", type: "text" }
+        ]
+      },
+      {
+        id: "dm",
+        slug: "dm",
+        icon: "💬",
+        name: "DM/WhatsApp Cierre Natural",
+        description: "Crea mensajes para responder objeciones y cerrar ventas sin presión.",
+        fields: [
+          { name: "producto", label: "Producto o servicio", type: "textarea" },
+          { name: "objecion", label: "Objeción principal del cliente", type: "textarea" },
+          { name: "tono", label: "Tono deseado", type: "text" }
+        ]
+      },
+      {
+        id: "seo",
+        slug: "seo",
+        icon: "🔎",
+        name: "SEO: Cluster + Briefs",
+        description: "Genera clusters, títulos, estructura, FAQs y briefs de contenido.",
+        fields: [
+          { name: "tema", label: "Tema o nicho", type: "textarea" },
+          { name: "objetivo", label: "Objetivo SEO", type: "text" },
+          { name: "pais", label: "País o mercado", type: "text" }
+        ]
+      },
+      {
+        id: "automatizacion",
+        slug: "automatizacion",
+        icon: "⚙️",
+        name: "Automatización Make/Zapier",
+        description: "Diseña un flujo automático con entradas, pasos, herramientas y salida.",
+        fields: [
+          { name: "proceso", label: "¿Qué proceso quieres automatizar?", type: "textarea" },
+          { name: "herramientas", label: "Herramientas que usas", type: "textarea" },
+          { name: "salida", label: "Resultado esperado", type: "text" }
+        ]
+      },
+      {
+        id: "validacion",
+        slug: "validacion",
+        icon: "✅",
+        name: "Validador de Idea Monetizable",
+        description: "Evalúa si una idea puede generar ingresos y qué paso dar después.",
+        fields: [
+          { name: "idea", label: "Describe tu idea", type: "textarea" },
+          { name: "mercado", label: "Mercado o público objetivo", type: "textarea" },
+          { name: "monetizacion", label: "Cómo crees que podría ganar dinero", type: "text" }
+        ]
+      }
+    ];
+
+    const grid = document.getElementById("grid");
+    const panel = document.getElementById("panel");
+
+    function getAssistantFromPath() {
+      const parts = window.location.pathname.split("/").filter(Boolean);
+      if (parts[0] === "asistentes" && parts[1]) {
+        return assistants.find(a => a.slug === parts[1]);
+      }
+      return null;
+    }
+
+    function renderGrid() {
+      grid.innerHTML = assistants.map(a => `
+        <article class="assistant-card" onclick="openAssistant('${a.slug}')">
+          <div class="assistant-icon">${a.icon}</div>
+          <h2>${a.name}</h2>
+          <p>${a.description}</p>
+        </article>
+      `).join("");
+    }
+
+    function openAssistant(slug) {
+      const assistant = assistants.find(a => a.slug === slug);
+      if (!assistant) return;
+
+      history.pushState({}, "", "/asistentes/" + assistant.slug);
+      renderAssistant(assistant);
+      window.scrollTo({ top: panel.offsetTop - 20, behavior: "smooth" });
+    }
+
+    function closeAssistant() {
+      history.pushState({}, "", "/asistentes");
+      panel.classList.remove("active");
+      panel.innerHTML = "";
+    }
+
+    function renderAssistant(assistant) {
+      panel.classList.add("active");
+      panel.innerHTML = `
+        <div class="panel-top">
+          <div>
+            <h2>${assistant.icon} ${assistant.name}</h2>
+            <p>${assistant.description}</p>
+          </div>
+          <button class="close-btn" onclick="closeAssistant()">Cerrar</button>
+        </div>
+
+        <form id="assistantForm">
+          ${assistant.fields.map(field => `
+            <div class="field">
+              <label for="${field.name}">${field.label}</label>
+              ${field.type === "textarea"
+                ? `<textarea id="${field.name}" name="${field.name}" required></textarea>`
+                : `<input id="${field.name}" name="${field.name}" type="text" required />`
+              }
+            </div>
+          `).join("")}
+
+          <button id="generateBtn" class="generate-btn" type="submit">Generar</button>
+        </form>
+
+        <div id="result" class="result"></div>
+        <div id="resultCta" style="display:none; margin-top:18px; text-align:center;">
+  <a
+    href="/acceso"
+    style="display:inline-block; padding:14px 22px; border-radius:14px; background:linear-gradient(90deg,#72d6ff,#9dffb3); color:#06111f; font-weight:800; text-decoration:none;"
+  >
+    Crear mi sistema con IA
+  </a>
+</div>
+      `;
+
+      document.getElementById("assistantForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const btn = document.getElementById("generateBtn");
+        const result = document.getElementById("result");
+        const formData = new FormData(event.target);
+        const inputs = {};
+
+        for (const [key, value] of formData.entries()) {
+          inputs[key] = value;
+        }
+
+        btn.disabled = true;
+        btn.textContent = "Generando...";
+        result.classList.add("active");
+        result.textContent = "Generando respuesta con Sistema Maestro IA...";
+
+        try {
+          const response = await fetch("/api/run", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              assistantId: assistant.id,
+              inputs
+            })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.detail || data.error || "Error generando respuesta");
+          }
+
+          result.textContent = data.output || data.result || "Respuesta generada, pero sin contenido visible.";
+          document.getElementById("resultCta").style.display = "block";
+        } catch (error) {
+          result.textContent =
+            "No se pudo generar todavía. Falta conectar o desplegar el endpoint backend /api/run.\\n\\nDetalle: " +
+            error.message;
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Generar";
+        }
+      });
+    }
+
+    window.addEventListener("popstate", () => {
+      const assistant = getAssistantFromPath();
+      if (assistant) {
+        renderAssistant(assistant);
+      } else {
+        closeAssistant();
+      }
+    });
+
+    renderGrid();
+
+    const initialAssistant = getAssistantFromPath();
+    if (initialAssistant) {
+      renderAssistant(initialAssistant);
+    }
+  </script>
+</body>
+</html>
