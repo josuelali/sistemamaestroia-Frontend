@@ -463,6 +463,7 @@
           }
 
           result.textContent = data.output || data.result || "Respuesta generada, pero sin contenido visible.";
+          document.getElementById("resultCta").style.display = "block";
         } catch (error) {
           result.textContent =
             "No se pudo generar todavía. Falta conectar o desplegar el endpoint backend /api/run.\\n\\nDetalle: " +
