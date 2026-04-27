@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="Demo pública de SISTEMA MAESTRO IA. Genera HTML con vista previa y código separado. Límite 3 usos." />
+  <meta name="description" content="Demo pública de SISTEMA MAESTRO IA. Genera HTML con vista previa y código separado. Límite 1 uso." />
 
   <style>
     :root{
@@ -215,7 +215,7 @@
         <div class="t">SISTEMA MAESTRO IA — Demo</div>
         <div class="s">Vista previa + código limpio · Copiar 1-click · Límite demo activo</div>
       </div>
-      <div class="pill"><span class="dot"></span> <span id="usesText">Usos restantes: 3</span></div>
+      <div class="pill"><span class="dot"></span> <span id="usesText">Usos restantes: 1</span></div>
     </div>
 
     <div class="grid">
@@ -235,7 +235,7 @@
 
           <div class="status" id="statusBox">
             <span>Estado: <strong id="statusText">Listo</strong></span>
-            <span>Límite: <strong id="limitText">3 usos</strong></span>
+            <span>Límite: <strong id="limitText">1 uso</strong></span>
           </div>
 
           <p class="hint">
@@ -285,7 +285,7 @@
     // CONFIG (tu fetch real)
     // ======================
     const API_ENDPOINT = "/api/generate";
-    const MAX_USAGE = 3;
+    const MAX_USAGE = 1;
     let usageCount = 0;
 
     // ====== UI refs ======
@@ -310,7 +310,7 @@
     function updateUsageUI(){
       const remaining = Math.max(0, MAX_USAGE - usageCount);
       usesText.textContent = "Usos restantes: " + remaining;
-      limitText.textContent = MAX_USAGE + " usos";
+      limitText.textContent = MAX_USAGE === 1 ? "1 uso" : (MAX_USAGE + " usos");
       btnGenerate.disabled = remaining <= 0;
     }
     function showToast(msg){
