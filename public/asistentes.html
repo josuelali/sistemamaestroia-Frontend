@@ -253,7 +253,7 @@
     <section id="panel" class="assistant-panel"></section>
 
     <p class="hub-note">
-      MVP conectado a Sistema Maestro IA. Los resultados dependen de la configuración del backend.
+      Tienes 1 prueba gratis total en Asistentes. Después continúa con el Plan Pro por 19,99€/mes.
     </p>
   </main>
 
@@ -359,6 +359,8 @@
 
     const grid = document.getElementById("grid");
     const panel = document.getElementById("panel");
+    const ASSISTANTS_TRIAL_KEY = "smia_assistants_trial_used";
+    const PRO_CHECKOUT_URL = "https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01";
 
     function getAssistantFromPath() {
       const parts = window.location.pathname.split("/").filter(Boolean);
@@ -393,6 +395,14 @@
       panel.innerHTML = "";
     }
 
+    function trialAlreadyUsed() {
+      return localStorage.getItem(ASSISTANTS_TRIAL_KEY) === "1";
+    }
+
+    function consumeTrial() {
+      localStorage.setItem(ASSISTANTS_TRIAL_KEY, "1");
+    }
+
     function renderAssistant(assistant) {
       panel.classList.add("active");
       panel.innerHTML = `
@@ -419,6 +429,14 @@
         </form>
 
         <div id="result" class="result"></div>
+        <div id="resultCta" style="display:none; margin-top:18px; text-align:center;">
+  <a
+    href="${PRO_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer"
+    style="display:inline-block; padding:14px 22px; border-radius:14px; background:linear-gradient(90deg,#72d6ff,#9dffb3); color:#06111f; font-weight:800; text-decoration:none;"
+  >
+    Activar Plan Pro 19,99€/mes
+  </a>
+</div>
       `;
 
       document.getElementById("assistantForm").addEventListener("submit", async (event) => {
@@ -433,9 +451,16 @@
           inputs[key] = value;
         }
 
+        result.classList.add("active");
+
+        if (trialAlreadyUsed()) {
+          result.textContent = "Ya has usado tu prueba gratis de Asistentes. Activa el Plan Pro por 19,99€/mes para desbloquear todos los asistentes sin límites.";
+          document.getElementById("resultCta").style.display = "block";
+          return;
+        }
+
         btn.disabled = true;
         btn.textContent = "Generando...";
-        result.classList.add("active");
         result.textContent = "Generando respuesta con Sistema Maestro IA...";
 
         try {
@@ -455,6 +480,8 @@
           }
 
           result.textContent = data.output || data.result || "Respuesta generada, pero sin contenido visible.";
+          consumeTrial();
+          document.getElementById("resultCta").style.display = "block";
         } catch (error) {
           result.textContent =
             "No se pudo generar todavía. Falta conectar o desplegar el endpoint backend /api/run.\\n\\nDetalle: " +
