@@ -291,3 +291,47 @@ body::after {
   pointer-events: none;
   z-index: -1;
 }
+/* Footer legal Sistema Maestro IA */
+.legal-footer {
+  max-width: 980px;
+  margin: 80px auto 40px;
+  padding: 0 24px 40px;
+  color: #dbeafe;
+}
+
+.legal-footer-card {
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 28px;
+  padding: 28px;
+  margin-bottom: 28px;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+}
+
+.legal-footer-card h2 {
+  margin: 0 0 18px;
+  color: #ffffff;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+}
+
+.legal-footer-card p {
+  margin: 10px 0;
+}
+
+.legal-footer-card a {
+  color: #93e8ff;
+  text-decoration: none;
+  font-size: 1.05rem;
+}
+
+.legal-footer-card a:hover {
+  text-decoration: underline;
+}
+
+.legal-footer-copy {
+  text-align: center;
+  color: #94a3b8;
+  border-top: 1px solid rgba(148, 163, 184, 0.18);
+  padding-top: 28px;
+  margin-top: 36px;
+}
