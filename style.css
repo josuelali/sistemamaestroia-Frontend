@@ -291,3 +291,15 @@ body::after {
   pointer-events: none;
   z-index: -1;
 }
+/* Botón visible para Asistentes */
+.btn-asistentes {
+  background: linear-gradient(135deg, #00e5ff, #7c3aed);
+  color: #ffffff !important;
+  border: 1px solid rgba(147, 232, 255, 0.45);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.35);
+}
+
+.btn-asistentes:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 34px rgba(124, 58, 237, 0.45);
+}
