@@ -303,3 +303,18 @@ body::after {
   transform: translateY(-2px);
   box-shadow: 0 0 34px rgba(124, 58, 237, 0.45);
 }
+
+
+/* Bot?n visible para Asistentes */
+.btn-asistentes {
+  background: linear-gradient(135deg, #00e5ff, #7c3aed);
+  color: #ffffff !important;
+  border: 1px solid rgba(147, 232, 255, 0.5);
+  box-shadow: 0 0 28px rgba(0, 229, 255, 0.38);
+  font-weight: 800;
+}
+
+.btn-asistentes:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 36px rgba(124, 58, 237, 0.55);
+}
