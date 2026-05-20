@@ -97,9 +97,10 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 <script>
-  gtag('event', 'purchase_confirmed', {
-    currency: 'EUR',
-    value: 29
+  gtag('event', 'pro_thank_you_view', {
+    asset_name: 'sistema_maestro_ia',
+    page_location: window.location.href,
+    event_note: 'thank_you_page_view_no_payment_confirmation'
   });
 </script>
 
