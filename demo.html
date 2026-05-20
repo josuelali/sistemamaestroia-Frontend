@@ -2,526 +2,245 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Demo — SISTEMA MAESTRO IA</title>
-<link rel="icon" href="/favicon.ico/" sizes="any">
-<link rel="manifest" href="/manifest.webmanifest/">
-<meta name="theme-color" content="#060B1A">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crea tu Jarvis de negocio con IA — Sistema Maestro IA</title>
+  <meta name="description" content="Demo pública de Sistema Maestro IA: crea el borrador de tu Jarvis de negocio en 60 segundos." />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="manifest" href="/manifest.webmanifest">
 
-<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="description" content="Demo pública de SISTEMA MAESTRO IA. Genera HTML con vista previa y código separado. Límite 1 uso." />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3CT444VHQ4');
+  </script>
 
   <style>
     :root{
-      --bg:#0A0A0F;
-      --surface:#11131A;
-      --surface2:#0E1016;
-      --border:#1F2430;
-      --text:#FFFFFF;
-      --muted:#B0B7C3;
-      --blue:#1E6BFF;
-      --cyan:#00D2FF;
-      --shadow: 0 12px 40px rgba(0,0,0,.45);
-      --radius:16px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      --bg:#070814;--card:#101425;--card2:#151b31;--line:#27314e;--text:#f7f9ff;--muted:#aab5d1;
+      --cyan:#00e5ff;--violet:#8b5cf6;--green:#39ff88;--yellow:#ffd166;--red:#ff5c7a;
     }
     *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 80% -10%, rgba(30,107,255,.24), transparent 60%),
-        radial-gradient(700px 420px at 20% 0%, rgba(0,210,255,.16), transparent 60%),
-        radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 0) 0 0/4px 4px,
-        var(--bg);
-      overflow-x:hidden;
-    }
-    .wrap{max-width:1200px;margin:0 auto;padding:24px}
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:14px 16px;border:1px solid var(--border);border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      position:sticky;top:12px;z-index:10;backdrop-filter: blur(10px);
-    }
-    .brand{display:flex;flex-direction:column;gap:2px}
-    .brand .t{font-weight:800;letter-spacing:.3px}
-    .brand .s{font-size:12px;color:var(--muted)}
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 12px;border-radius:999px;border:1px solid var(--border);
-      background:rgba(17,19,26,.65);
-      color:var(--muted);font-size:12px;
-      white-space:nowrap;
-    }
-    .dot{width:8px;height:8px;border-radius:50%;background:rgba(0,210,255,.9);box-shadow:0 0 18px rgba(0,210,255,.6)}
-    .grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: 420px 1fr;
-      gap:18px;
-      align-items:start;
-    }
-    .card{
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .card h2{
-      margin:0;
-      padding:14px 16px;
-      font-size:13px;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      color:rgba(255,255,255,.86);
-      border-bottom:1px solid var(--border);
-      background:rgba(10,10,15,.35);
-    }
-    .card .body{padding:16px}
-    .field{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
-    label{font-size:12px;color:var(--muted)}
-    textarea{
-      width:100%;
-      min-height:140px;
-      resize:vertical;
-      border:1px solid var(--border);
-      border-radius:12px;
-      background:rgba(14,16,22,.7);
-      color:var(--text);
-      padding:12px 12px;
-      outline:none;
-      font-size:14px;
-      line-height:1.5;
-    }
-    .row{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{
-      border:1px solid var(--border);
-      background:rgba(17,19,26,.75);
-      color:var(--text);
-      padding:10px 12px;
-      border-radius:12px;
-      font-weight:700;
-      cursor:pointer;
-      transition:transform .06s ease, background .2s ease, border-color .2s ease;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
-      user-select:none;
-    }
-    .btn:active{transform:translateY(1px)}
-    .btn.primary{
-      background:linear-gradient(90deg, rgba(0,210,255,.9), rgba(30,107,255,.9));
-      border-color:rgba(30,107,255,.55);
-    }
-    .btn.ghost{background:transparent}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
-
-    .hint{font-size:12px;color:var(--muted);line-height:1.4;margin:10px 0 0}
-    .status{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:rgba(14,16,22,.55);
-      color:var(--muted);
-      font-size:12px;
-      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
-    }
-    .status strong{color:rgba(255,255,255,.9)}
-
-    .panes{
-      display:grid;
-      grid-template-rows: auto 1fr;
-      gap:18px;
-    }
-    .split{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:18px;
-    }
-    .subhead{
-      display:flex;align-items:center;justify-content:space-between;gap:12px;
-      padding:12px 14px;border-bottom:1px solid var(--border);
-      background:rgba(10,10,15,.35);
-    }
-    .subhead .title{font-size:12px;color:rgba(255,255,255,.86);letter-spacing:.06em;text-transform:uppercase}
-    .subhead .actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-    .frame{
-      width:100%;
-      height:520px;
-      border:0;
-      background:white;
-      border-radius:0 0 var(--radius) var(--radius);
-    }
-    pre{
-      margin:0;
-      height:520px;
-      overflow:auto;
-      padding:14px;
-      font-family:var(--mono);
-      font-size:12.5px;
-      line-height:1.5;
-      background:rgba(10,10,15,.55);
-      color:rgba(255,255,255,.9);
-    }
-    .tabs{display:flex;gap:8px;flex-wrap:wrap}
-    .tab{
-      padding:8px 10px;border-radius:999px;border:1px solid var(--border);
-      background:rgba(17,19,26,.55);
-      color:var(--muted);font-size:12px;cursor:pointer;
-    }
-    .tab.active{
-      background:rgba(0,210,255,.14);
-      border-color:rgba(0,210,255,.45);
-      color:rgba(255,255,255,.9);
-    }
-    .toast{
-      position:fixed;right:18px;bottom:18px;
-      padding:10px 12px;border-radius:12px;border:1px solid var(--border);
-      background:rgba(17,19,26,.92);color:rgba(255,255,255,.9);
-      box-shadow:var(--shadow);
-      opacity:0;transform:translateY(6px);
-      transition:opacity .18s ease, transform .18s ease;
-      pointer-events:none;
-      font-size:12px;
-    }
-    .toast.show{opacity:1;transform:translateY(0)}
-    @media (max-width: 1080px){
-      .grid{grid-template-columns:1fr}
-      .split{grid-template-columns:1fr}
-      .frame, pre{height:460px}
-    }
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:radial-gradient(circle at top left,#202b67 0,#070814 42%,#03040b 100%);color:var(--text)}
+    a{color:inherit}.wrap{max-width:1160px;margin:0 auto;padding:28px 18px 54px}.top{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:28px}.brand{font-weight:900;letter-spacing:-.04em}.back{color:var(--muted);text-decoration:none;font-size:14px}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;align-items:stretch}.panel,.result-card{background:linear-gradient(145deg,rgba(16,20,37,.96),rgba(11,14,28,.96));border:1px solid var(--line);border-radius:26px;box-shadow:0 24px 70px rgba(0,0,0,.32)}.copy{padding:32px}.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(0,229,255,.1);border:1px solid rgba(0,229,255,.35);color:#b8f7ff;font-size:13px;font-weight:800}.dot{width:8px;height:8px;border-radius:99px;background:var(--green);box-shadow:0 0 18px var(--green)}h1{font-size:clamp(38px,7vw,74px);line-height:.92;margin:18px 0 16px;letter-spacing:-.075em}.grad{background:linear-gradient(90deg,var(--cyan),#d7b4ff,var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}.subtitle{font-size:19px;line-height:1.55;color:#d8def2;margin:0 0 18px}.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.mini{padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(255,255,255,.045);color:var(--muted);font-size:13px}.mini b{display:block;color:var(--text);font-size:18px}.form{padding:24px}.form h2{margin:0 0 8px;font-size:24px}.hint{color:var(--muted);font-size:14px;line-height:1.5;margin:0 0 18px}.field{margin:14px 0}.field label{display:block;font-size:13px;color:#dce7ff;font-weight:800;margin-bottom:7px}.field textarea,.field select{width:100%;border:1px solid #303a5d;background:#0b1020;color:var(--text);border-radius:16px;padding:14px;outline:none;font:inherit;min-height:92px;resize:vertical}.field select{min-height:auto;resize:none}.field textarea:focus,.field select:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(0,229,255,.08)}.btn{border:0;border-radius:16px;padding:15px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px;transition:.18s ease}.btn.primary{width:100%;background:linear-gradient(90deg,var(--cyan),var(--violet));color:#050714;box-shadow:0 18px 40px rgba(0,229,255,.18)}.btn.primary:hover{transform:translateY(-1px)}.btn.ghost{background:transparent;border:1px solid #354066;color:#dce7ff}.limit{margin-top:12px;color:var(--muted);font-size:12px;text-align:center}.result-wrap{display:none;margin-top:24px}.result-wrap.active{display:block}.result-card{padding:24px}.result-head{display:flex;justify-content:space-between;gap:12px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:18px}.jarvis-name{font-size:26px;font-weight:950;letter-spacing:-.04em}.pill{font-size:12px;color:#132018;background:#9effc4;border-radius:99px;padding:7px 10px;font-weight:900;white-space:nowrap}.section{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}.section:last-child{border-bottom:0}.section h3{margin:0 0 8px;font-size:14px;color:#aeefff;text-transform:uppercase;letter-spacing:.12em}.section p,.section li{color:#e6ebfb;line-height:1.55}.section ul{margin:0;padding-left:20px}.quote{background:#08111f;border:1px solid #27405f;border-radius:16px;padding:14px;color:#fff}.pro{margin-top:18px;padding:20px;border-radius:22px;background:linear-gradient(135deg,rgba(139,92,246,.22),rgba(0,229,255,.12));border:1px solid rgba(139,92,246,.45)}.pro h2{margin:0 0 8px}.pro p{color:#dce7ff;line-height:1.5}.pro-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}.checkout{background:linear-gradient(90deg,#39ff88,#00e5ff);color:#05100a}.assist{background:rgba(255,255,255,.06);border:1px solid #3b4568;color:#fff}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111827;border:1px solid #334155;color:#fff;padding:12px 14px;border-radius:14px;opacity:0;pointer-events:none;transition:.2s}.toast.show{opacity:1}@media(max-width:900px){.hero{grid-template-columns:1fr}.trust{grid-template-columns:1fr}.copy{padding:24px}.top{align-items:flex-start;flex-direction:column}}
   </style>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3CT444VHQ4');
-</script>
-
 </head>
-
 <body>
   <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <div class="t">SISTEMA MAESTRO IA — Demo</div>
-        <div class="s">Vista previa + código limpio · Copiar 1-click · Límite demo activo</div>
-      </div>
-      <div class="pill"><span class="dot"></span> <span id="usesText">Usos restantes: 1</span></div>
-    </div>
+    <header class="top">
+      <div class="brand">Sistema Maestro IA</div>
+      <a class="back" href="/">← Volver al inicio</a>
+    </header>
 
-    <div class="grid">
-      <!-- LEFT: Controls -->
-      <div class="card">
-        <h2>Generador</h2>
-        <div class="body">
+    <main>
+      <section class="hero">
+        <div class="panel copy">
+          <span class="badge"><span class="dot"></span> Demo pública · 1 creación gratis</span>
+          <h1>Crea tu <span class="grad">Jarvis de negocio</span> con IA</h1>
+          <p class="subtitle">Responde 3 preguntas y Sistema Maestro IA diseñará un asistente personalizado para ayudarte a vender, organizar y monetizar tu proyecto.</p>
+          <div class="trust">
+            <div class="mini"><b>3 datos</b>sin prompts raros</div>
+            <div class="mini"><b>&lt;60s</b>salida útil</div>
+            <div class="mini"><b>Plan Pro</b>19,99 €/mes</div>
+          </div>
+        </div>
+
+        <div class="panel form">
+          <h2>Diseña tu Jarvis</h2>
+          <p class="hint">Crea una primera versión de tu asistente de negocio con misión, funciones y primera acción comercial.</p>
+
           <div class="field">
-            <label for="prompt">Prompt</label>
-            <textarea id="prompt" placeholder="Describe el contenido que quieres generar..."></textarea>
+            <label for="projectInput">1. ¿Qué negocio, idea o proyecto quieres mejorar?</label>
+            <textarea id="projectInput" placeholder="Ej: auditorías web, app de IA, consultoría, tienda online, servicio local..."></textarea>
           </div>
 
-          <div class="row">
-            <button class="btn primary" id="btnGenerate">Generar contenido</button>
-            <button class="btn ghost" id="btnReset" type="button">Reset</button>
+          <div class="field">
+            <label for="clientInput">2. ¿A quién quieres vender o ayudar?</label>
+            <textarea id="clientInput" placeholder="Ej: negocios locales, emprendedores, clínicas, restaurantes, creadores..."></textarea>
           </div>
 
-          <div class="status" id="statusBox">
-            <span>Estado: <strong id="statusText">Listo</strong></span>
-            <span>Límite: <strong id="limitText">1 uso</strong></span>
+          <div class="field">
+            <label for="taskInput">3. ¿Qué quieres que tu Jarvis haga por ti primero?</label>
+            <select id="taskInput">
+              <option value="Crear ofertas">Crear ofertas</option>
+              <option value="Mejorar mi landing">Mejorar mi landing</option>
+              <option value="Escribir mensajes de venta">Escribir mensajes de venta</option>
+              <option value="Preparar anuncios">Preparar anuncios</option>
+              <option value="Automatizar tareas">Automatizar tareas</option>
+              <option value="Validar una idea">Validar una idea</option>
+              <option value="Organizar mi negocio">Organizar mi negocio</option>
+            </select>
           </div>
 
-          <p class="hint">
-            El resultado se interpreta como HTML cuando es posible (vista previa). El código se separa en pestañas (HTML/CSS/JS) y se puede copiar.
-          </p>
+          <button class="btn primary" id="createBtn" type="button">⚡ Crear mi Jarvis de negocio</button>
+          <div class="limit" id="limitText">Luego desbloquea todos los asistentes, landings, anuncios, emails y automatizaciones con el Plan Pro.</div>
         </div>
-      </div>
+      </section>
 
-      <!-- RIGHT: Output -->
-      <div class="panes">
-        <div class="split">
-          <!-- Preview -->
-          <div class="card">
-            <div class="subhead">
-              <div class="title">Vista previa</div>
-              <div class="actions">
-                <button class="btn" id="btnOpenNew" type="button">Abrir en pestaña</button>
-              </div>
+      <section class="result-wrap" id="resultWrap" aria-live="polite">
+        <div class="result-card">
+          <div class="result-head">
+            <div>
+              <div class="hint">Tu Jarvis de negocio</div>
+              <div class="jarvis-name" id="jarvisName">Jarvis Comercial</div>
             </div>
-            <iframe class="frame" id="previewFrame" title="Vista previa"></iframe>
+            <span class="pill">Borrador creado</span>
           </div>
 
-          <!-- Code -->
-          <div class="card">
-            <div class="subhead">
-              <div class="title">Código</div>
-              <div class="actions">
-                <div class="tabs" id="tabs">
-                  <button class="tab active" data-tab="html" type="button">HTML</button>
-                  <button class="tab" data-tab="css" type="button">CSS</button>
-                  <button class="tab" data-tab="js" type="button">JS</button>
-                </div>
-                <button class="btn" id="btnCopy" type="button">Copiar</button>
-              </div>
+          <div class="section">
+            <h3>Misión</h3>
+            <p id="missionText"></p>
+          </div>
+
+          <div class="section">
+            <h3>Funciones principales</h3>
+            <ul id="functionsList"></ul>
+          </div>
+
+          <div class="section">
+            <h3>Primera orden recomendada</h3>
+            <div class="quote" id="firstOrder"></div>
+          </div>
+
+          <div class="section">
+            <h3>Mensaje de venta para usar hoy</h3>
+            <div class="quote" id="salesMessage"></div>
+          </div>
+
+          <div class="section">
+            <h3>Siguiente acción</h3>
+            <p id="nextAction"></p>
+          </div>
+
+          <div class="pro">
+            <h2>Convierte este borrador en un sistema completo</h2>
+            <p>Con la demo creas el primer diseño de tu Jarvis. Con el <strong>Plan Pro 19,99 €/mes</strong> desbloqueas ofertas, landings, anuncios, emails, WhatsApp/DM, SEO, automatizaciones y validación de ideas.</p>
+            <div class="pro-actions">
+              <a class="btn checkout" id="checkoutBtn" href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" target="_blank" rel="noopener noreferrer">Activar Plan Pro — 19,99 €/mes</a>
+              <a class="btn assist" id="assistantsBtn" href="/asistentes">Ver asistentes incluidos</a>
             </div>
-            <pre><code id="codeBlock"></code></pre>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
 
-  <div class="toast" id="toast">Copiado</div>
+  <div class="toast" id="toast">Completa los campos</div>
 
   <script>
-    // ======================
-    // CONFIG (tu fetch real)
-    // ======================
-    const API_ENDPOINT = "/api/generate";
-    const MAX_USAGE = 1;
-    let usageCount = 0;
+    const DEMO_KEY = 'sistema_maestro_jarvis_demo_used';
+    const projectInput = document.getElementById('projectInput');
+    const clientInput = document.getElementById('clientInput');
+    const taskInput = document.getElementById('taskInput');
+    const createBtn = document.getElementById('createBtn');
+    const limitText = document.getElementById('limitText');
+    const resultWrap = document.getElementById('resultWrap');
+    const toast = document.getElementById('toast');
+    let formStarted = false;
 
-    // ====== UI refs ======
-    const elPrompt = document.getElementById("prompt");
-    const btnGenerate = document.getElementById("btnGenerate");
-    const btnReset = document.getElementById("btnReset");
-    const statusText = document.getElementById("statusText");
-    const limitText = document.getElementById("limitText");
-    const usesText = document.getElementById("usesText");
-    const previewFrame = document.getElementById("previewFrame");
-    const codeBlock = document.getElementById("codeBlock");
-    const btnCopy = document.getElementById("btnCopy");
-    const btnOpenNew = document.getElementById("btnOpenNew");
-    const tabs = document.getElementById("tabs");
-    const toast = document.getElementById("toast");
-
-    let last = { html:"", css:"", js:"", full:"" };
-    let activeTab = "html";
-
-    // ====== Helpers ======
-    function setStatus(text){ statusText.textContent = text; }
-    function updateUsageUI(){
-      const remaining = Math.max(0, MAX_USAGE - usageCount);
-      usesText.textContent = "Usos restantes: " + remaining;
-      limitText.textContent = MAX_USAGE === 1 ? "1 uso" : (MAX_USAGE + " usos");
-      btnGenerate.disabled = remaining <= 0;
-    }
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      setTimeout(()=>toast.classList.remove("show"), 1100);
-    }
-    function escapeHtml(s){
-      return (s ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;");
-    }
-
-    // Basic HTML formatter (estable + sin dependencias)
-    function formatHTML(html){
-      html = (html ?? "").trim();
-      if(!html) return "";
-      html = html.replace(/\r\n/g,"\n").replace(/\t/g,"  ");
-      html = html.replace(/></g, ">\n<");
-      const lines = html.split("\n");
-      let indent = 0;
-      const out = [];
-      const voidTag = /^<\s*(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)(\s|\/|>)/i;
-
-      for (let line of lines){
-        line = line.trim();
-        if(!line) continue;
-
-        const isClosing = /^<\/.+>/.test(line);
-        const isOpening = /^<[^!\/].*>$/.test(line) && !/\/>$/.test(line) && !voidTag.test(line);
-        const isSelfClosing = /\/>$/.test(line) || voidTag.test(line) || /^<!/.test(line) || /^<\?/.test(line);
-
-        if (isClosing) indent = Math.max(0, indent - 1);
-        out.push("  ".repeat(indent) + line);
-        if (isOpening && !isSelfClosing && !line.startsWith("<!")) indent += 1;
+    function track(eventName, params = {}) {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, {
+          asset_name: 'sistema_maestro_ia',
+          demo_type: 'jarvis_business_demo',
+          page_url: window.location.href,
+          ...params
+        });
       }
-      return out.join("\n");
     }
 
-    // Extrae CSS/JS si el backend devuelve documento HTML completo (best-effort)
-    function splitCode(fullHtml){
-      const full = fullHtml ?? "";
-      const css = Array.from(full.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)).map(m=>m[1].trim()).join("\n\n");
-      const js  = Array.from(full.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/gi)).map(m=>m[1].trim()).join("\n\n");
-
-      const html = full
-        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
-        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-        .trim();
-
-      return { html, css, js, full };
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1400);
     }
 
-    function renderPreview(fullHtml){
-      const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
-      doc.open();
-      doc.write(fullHtml || "<!doctype html><html><body></body></html>");
-      doc.close();
+    function clean(value, fallback) {
+      return (value || '').trim().replace(/\s+/g, ' ') || fallback;
     }
 
-    function renderCode(){
-      let content = "";
-      if(activeTab === "html") content = formatHTML(last.html || last.full);
-      if(activeTab === "css")  content = (last.css || "").trim();
-      if(activeTab === "js")   content = (last.js || "").trim();
-      if(!content) content = "(vacío)";
-      codeBlock.innerHTML = escapeHtml(content);
-    }
-
-    function setTab(tab){
-      activeTab = tab;
-      Array.from(tabs.querySelectorAll(".tab")).forEach(b=>{
-        b.classList.toggle("active", b.dataset.tab === tab);
-      });
-      renderCode();
-    }
-
-    async function copyActive(){
-      let content = "";
-      if(activeTab === "html") content = formatHTML(last.html || last.full);
-      if(activeTab === "css")  content = (last.css || "").trim();
-      if(activeTab === "js")   content = (last.js || "").trim();
-      await navigator.clipboard.writeText(content || "");
-      showToast("Copiado: " + activeTab.toUpperCase());
-    }
-
-    function openInNewTab(){
-      const w = window.open("", "_blank");
-      if(!w) return;
-      w.document.open();
-      w.document.write(last.full || "<!doctype html><html><body></body></html>");
-      w.document.close();
-    }
-
-    // ======================
-    // TU FETCH incorporado
-    // ======================
-    async function generateFromBackend(promptText){
-      const response = await fetch(API_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: promptText })
-      });
-
-      // tu backend actual responde JSON; si falla, intentamos leer texto
-      if(!response.ok){
-        const txt = await response.text().catch(()=> "");
-        throw new Error(txt || ("HTTP " + response.status));
+    function updateLimit() {
+      if (localStorage.getItem(DEMO_KEY) === '1') {
+        createBtn.textContent = 'Demo usada · Activar Plan Pro';
+        limitText.textContent = 'Ya has usado tu demo gratuita. Puedes revisar tu Jarvis o activar el Plan Pro para desbloquear el sistema completo.';
       }
-
-      const data = await response.json();
-      return data; // { result: "..."} o { error: "..."}
     }
 
-    async function onGenerate(){
-      // Límite demo en frontend (tu versión actual)
-      if (usageCount >= MAX_USAGE) {
-        setStatus("Límite alcanzado");
-        showToast("Límite demo alcanzado");
+    function renderJarvis() {
+      const project = clean(projectInput.value, 'tu proyecto');
+      const client = clean(clientInput.value, 'tu cliente ideal');
+      const task = clean(taskInput.value, 'Crear ofertas');
+
+      if (!projectInput.value.trim() || !clientInput.value.trim()) {
+        showToast('Completa proyecto y cliente ideal');
         return;
       }
 
-      const promptText = (elPrompt.value || "").trim();
-      if(!promptText){
-        showToast("Escribe algo antes de generar");
-        elPrompt.focus();
-        return;
+      if (localStorage.getItem(DEMO_KEY) === '1') {
+        track('demo_limit_reached', { cta_location: 'demo_form' });
       }
 
-      btnGenerate.disabled = true;
-      setStatus("Generando…");
+      track('demo_generate_click', { first_task: task });
 
-      try{
-        const data = await generateFromBackend(promptText);
+      const shortProject = project.length > 58 ? project.slice(0, 58) + '…' : project;
+      document.getElementById('jarvisName').textContent = `Jarvis Comercial para ${shortProject}`;
+      document.getElementById('missionText').textContent = `Ayudarte a convertir ${project} en una oferta clara, vendible y accionable para ${client}.`;
 
-        if (data && data.result) {
-          usageCount++;
-          updateUsageUI();
+      const functions = [
+        `Detectar el problema principal de ${client}.`,
+        `Transformar ${project} en una oferta fácil de entender.`,
+        `Crear mensajes de venta para web, WhatsApp, email o redes.`,
+        `Proponer la siguiente acción comercial sin perder tiempo en teoría.`,
+        `Prioridad inicial seleccionada: ${task}.`
+      ];
+      document.getElementById('functionsList').innerHTML = functions.map(item => `<li>${item}</li>`).join('');
 
-          // Si el backend devuelve HTML completo, lo renderizamos.
-          // Si devuelve texto/fragmento, lo envolvemos en HTML mínimo.
-          const raw = String(data.result);
+      document.getElementById('firstOrder').textContent = `Crea una oferta irresistible para ${client} basada en ${project}. Prioriza: ${task}.`;
+      document.getElementById('salesMessage').textContent = `Hola, estoy preparando ${project} para ayudar a ${client} a conseguir un resultado más claro y rápido. La idea es empezar con una versión simple, útil y accionable. ¿Quieres que te enseñe una primera propuesta?`;
+      document.getElementById('nextAction').textContent = `Hoy: valida esta oferta con una publicación, una landing simple o 3 conversaciones reales. Mide respuestas antes de construir más.`;
 
-          const looksLikeHtml = /<\s*(!doctype|html|head|body|div|section|main|style|script)\b/i.test(raw);
-          const fullHtml = looksLikeHtml
-            ? raw
-            : `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Salida — SISTEMA MAESTRO IA</title></head><body>${raw}</body></html>`;
+      resultWrap.classList.add('active');
+      resultWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      localStorage.setItem(DEMO_KEY, '1');
+      updateLimit();
+      track('demo_result_view', { first_task: task });
+    }
 
-          last = splitCode(fullHtml);
-
-          renderPreview(last.full);
-          renderCode();
-
-          setStatus("OK");
-
-        } else {
-          const msg = (data && data.error) ? String(data.error) : "Error desconocido.";
-          setStatus("Error");
-          showToast(msg.slice(0, 90));
-
-          // Mostrar el error también en el panel de código (pestaña HTML)
-          last = { html: "", css: "", js: "", full: `<!doctype html><html><body style="font-family:system-ui;padding:24px">${escapeHtml(msg)}</body></html>` };
-          renderPreview(last.full);
-          renderCode();
+    [projectInput, clientInput, taskInput].forEach(el => {
+      el.addEventListener('input', () => {
+        if (!formStarted) {
+          formStarted = true;
+          track('demo_form_start', { cta_location: 'demo_form' });
         }
-
-      } catch (error) {
-        console.error(error);
-        setStatus("Error de conexión");
-        showToast("Error de conexión con el backend");
-
-        last = { html:"", css:"", js:"", full:`<!doctype html><html><body style="font-family:system-ui;padding:24px">Error de conexión con el backend.</body></html>` };
-        renderPreview(last.full);
-        renderCode();
-
-      } finally{
-        btnGenerate.disabled = (usageCount >= MAX_USAGE);
-      }
-    }
-
-    function onReset(){
-      elPrompt.value = "";
-      last = { html:"", css:"", js:"", full:"" };
-      usageCount = 0;
-      updateUsageUI();
-      renderPreview("<!doctype html><html><body style='font-family:system-ui;padding:24px'>Listo.</body></html>");
-      setStatus("Listo");
-      setTab("html");
-    }
-
-    // ====== Events ======
-    btnGenerate.addEventListener("click", onGenerate);
-    btnReset.addEventListener("click", onReset);
-    btnCopy.addEventListener("click", copyActive);
-    btnOpenNew.addEventListener("click", openInNewTab);
-    tabs.addEventListener("click", (e)=>{
-      const b = e.target.closest(".tab");
-      if(!b) return;
-      setTab(b.dataset.tab);
+      });
+      el.addEventListener('change', () => {
+        if (!formStarted) {
+          formStarted = true;
+          track('demo_form_start', { cta_location: 'demo_form' });
+        }
+      });
     });
 
-    // init
-    onReset();
+    createBtn.addEventListener('click', renderJarvis);
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      track('begin_checkout', {
+        cta_text: 'Activar Plan Pro — 19,99 €/mes',
+        cta_location: 'demo_result',
+        product_name: 'Plan Pro',
+        value: 19.99,
+        currency: 'EUR',
+        destination_url: 'https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01'
+      });
+      track('pro_cta_click', { cta_location: 'demo_result' });
+    });
+    document.getElementById('assistantsBtn').addEventListener('click', () => {
+      track('cta_click', { cta_text: 'Ver asistentes incluidos', cta_location: 'demo_result', destination_url: '/asistentes' });
+    });
+
+    track('demo_start', { cta_location: 'page_load' });
+    updateLimit();
   </script>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/sw.js');
-}
-</script>
-
 </body>
-
 </html>
