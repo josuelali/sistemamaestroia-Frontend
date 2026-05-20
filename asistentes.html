@@ -224,6 +224,36 @@
       display: block;
     }
 
+
+    .demo-cta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 10px;
+    }
+
+    .demo-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .demo-cta-primary {
+      color: #06111f;
+      background: linear-gradient(90deg, #72d6ff, #9dffb3);
+    }
+
+    .demo-cta-secondary {
+      color: #e8eef7;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+    }
+
     .hub-note {
       margin-top: 26px;
       color: #7f8ca3;
@@ -246,6 +276,12 @@
         Elige un asistente, rellena un formulario simple y genera una salida lista para usar:
         ofertas, landings, anuncios, emails, SEO, automatizaciones y validación de ideas.
       </p>
+    </section>
+
+
+    <section class="demo-cta" aria-label="Demo Jarvis">
+      <a class="demo-cta-primary" href="/demo.html">⚡ Crear mi Jarvis gratis</a>
+      <a class="demo-cta-secondary" href="/demo.html">Diseña tu Jarvis de negocio en 60 segundos</a>
     </section>
 
     <section id="grid" class="assistants-grid"></section>
