@@ -3,61 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gracias por suscribirte | Sistema Maestro IA</title>
+<title>Gracias por activar Sistema Maestro IA Pro</title>
 <link rel="stylesheet" href="style.css">
-<link rel="icon" href="/favicon.ico/" sizes="any">
-<link rel="manifest" href="/manifest.webmanifest/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#060B1A">
-
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
-.gracias-container{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:40px 20px;
-  background:linear-gradient(180deg,#060b1f,#050814);
-}
-
-.gracias-box{
-  max-width:600px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.08);
-  border-radius:20px;
-  padding:40px;
-  backdrop-filter:blur(10px);
-}
-
-.gracias-box h1{
-  font-size:2rem;
-  margin-bottom:20px;
-}
-
-.gracias-box p{
-  opacity:0.85;
-  margin-bottom:25px;
-}
-
-.gracias-btn{
-  display:inline-block;
-  padding:14px 28px;
-  border-radius:12px;
-  background:linear-gradient(90deg,#4facfe,#9f5cff);
-  color:white;
-  font-weight:600;
-  text-decoration:none;
-  transition:0.3s;
-}
-
-.gracias-btn:hover{
-  transform:scale(1.05);
-}
+.gracias-container{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:left;padding:40px 20px;background:linear-gradient(180deg,#060b1f,#050814)}
+.gracias-box{max-width:720px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.09);border-radius:22px;padding:40px;backdrop-filter:blur(10px);box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.gracias-box h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 20px;letter-spacing:-.04em}.gracias-box h2{font-size:1.25rem;margin:28px 0 10px}.gracias-box p,.gracias-box li{opacity:0.86;line-height:1.65}.gracias-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.gracias-btn{display:inline-block;padding:13px 18px;border-radius:12px;background:linear-gradient(90deg,#4facfe,#9f5cff);color:white;font-weight:700;text-decoration:none;transition:0.3s}.gracias-btn.secondary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}.notice{padding:16px 18px;border-left:4px solid #72d6ff;border-radius:14px;background:rgba(114,214,255,.09);margin:18px 0}.small{font-size:.92rem;opacity:.72}
 </style>
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
 <script>
@@ -66,30 +22,36 @@
   gtag('js', new Date());
   gtag('config', 'G-3CT444VHQ4');
 </script>
-
 </head>
-
 <body>
-
 <div class="gracias-container">
-  <div class="gracias-box">
-    <h1>🎉 Suscripción Activada</h1>
-    <p>
-      Bienvenido a <strong>Sistema Maestro IA – Plan Pro</strong>.<br>
-      Tu suscripción está activa y ya puedes utilizar todas las funciones profesionales.
+  <main class="gracias-box">
+    <h1>Gracias por activar Sistema Maestro IA Pro</h1>
+
+    <p class="notice">
+      Hemos recibido tu activación a través de Stripe. El acceso Pro se gestiona actualmente de forma asistida/manual, usando el email introducido durante el pago en Stripe.
     </p>
 
-    <p>
-      Recibirás confirmación por correo electrónico.<br>
-      Puedes cancelar o gestionar tu suscripción en cualquier momento.
-    </p>
+    <h2>Qué ocurre ahora</h2>
+    <ul>
+      <li>Usaremos el email introducido en Stripe para identificar tu activación.</li>
+      <li>Si necesitamos confirmar algún dato o darte instrucciones, contactaremos contigo por email.</li>
+      <li>No existe todavía un panel Pro automático con login propio dentro de la app.</li>
+      <li>Mientras tanto, puedes seguir usando la demo y los asistentes disponibles según el estado actual del servicio.</li>
+    </ul>
 
-    <a href="demo.html" class="gracias-btn">Ir al Panel / Demo</a>
+    <h2>Soporte</h2>
+    <p>Para cualquier duda sobre activación, acceso, soporte o cancelación, escribe a <strong>contacto@sistemamaestroia.com</strong>.</p>
 
-    <p style="margin-top:30px;font-size:0.9rem;opacity:0.6;">
-      Si tienes cualquier problema, responde al correo de confirmación.
-    </p>
-  </div>
+    <div class="gracias-actions">
+      <a href="/contact.html" class="gracias-btn">Contactar soporte</a>
+      <a href="/subscription.html" class="gracias-btn secondary">Ver información de suscripción</a>
+      <a href="/data-deletion.html" class="gracias-btn secondary">Eliminación de datos</a>
+      <a href="/demo.html" class="gracias-btn secondary">Volver a la demo</a>
+    </div>
+
+    <p class="small" style="margin-top:28px;">Esta página no promete acceso instantáneo ni desbloqueo automático. Refleja el estado actual del Plan Pro mientras se prepara una integración Pro completa.</p>
+  </main>
 </div>
 <script>
 if ('serviceWorker' in navigator) {
@@ -97,12 +59,13 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 <script>
-  gtag('event', 'pro_thank_you_view', {
-    asset_name: 'sistema_maestro_ia',
-    page_location: window.location.href,
-    event_note: 'thank_you_page_view_no_payment_confirmation'
-  });
+  if (typeof gtag === 'function') {
+    gtag('event', 'pro_thank_you_view', {
+      asset_name: 'sistema_maestro_ia',
+      page_location: window.location.href,
+      event_note: 'thank_you_page_view_no_payment_confirmation_manual_activation'
+    });
+  }
 </script>
-
 </body>
 </html>

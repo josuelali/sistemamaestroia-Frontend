@@ -253,7 +253,7 @@
     <section id="panel" class="assistant-panel"></section>
 
     <p class="hub-note">
-      Tienes 1 prueba gratis total en Asistentes. Después continúa con el Plan Pro por 19,99€/mes.
+      Tienes 1 prueba gratis total en Asistentes. Después puedes consultar el Plan Pro web por 19,99€/mes con activación asistida.
     </p>
   </main>
 
@@ -434,7 +434,7 @@
     href="${PRO_CHECKOUT_URL}" target="_blank" rel="noopener noreferrer"
     style="display:inline-block; padding:14px 22px; border-radius:14px; background:linear-gradient(90deg,#72d6ff,#9dffb3); color:#06111f; font-weight:800; text-decoration:none;"
   >
-    Activar Plan Pro 19,99€/mes
+    Activar Plan Pro web 19,99€/mes
   </a>
 </div>
       `;
@@ -454,7 +454,7 @@
         result.classList.add("active");
 
         if (trialAlreadyUsed()) {
-          result.textContent = "Ya has usado tu prueba gratis de Asistentes. Activa el Plan Pro por 19,99€/mes para desbloquear todos los asistentes sin límites.";
+          result.textContent = "Ya has usado tu prueba gratis de Asistentes. Puedes consultar el Plan Pro web por 19,99€/mes con activación asistida. En la app Android de Google Play no se ofrece compra directa por Stripe.";
           document.getElementById("resultCta").style.display = "block";
           return;
         }
@@ -509,5 +509,6 @@
       renderAssistant(initialAssistant);
     }
   </script>
+  <script src="/play-billing-guard.js"></script>
 </body>
 </html>

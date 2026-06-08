@@ -99,7 +99,7 @@
           </div>
 
           <button class="btn primary" id="createBtn" type="button">⚡ Crear mi Jarvis de negocio</button>
-          <div class="limit" id="limitText">Luego desbloquea todos los asistentes, landings, anuncios, emails y automatizaciones con el Plan Pro.</div>
+          <div class="limit" id="limitText">Después puedes consultar el Plan Pro web con activación asistida/manual.</div>
         </div>
       </section>
 
@@ -140,9 +140,9 @@
 
           <div class="pro">
             <h2>Convierte este borrador en un sistema completo</h2>
-            <p>Con la demo creas el primer diseño de tu Jarvis. Con el <strong>Plan Pro 19,99 €/mes</strong> desbloqueas ofertas, landings, anuncios, emails, WhatsApp/DM, SEO, automatizaciones y validación de ideas.</p>
+            <p>Con la demo creas el primer diseño de tu Jarvis. El <strong>Plan Pro web 19,99 €/mes</strong> se gestiona de forma asistida/manual y sirve para ampliar el uso disponible sin prometer un desbloqueo automático dentro de la app Android.</p>
             <div class="pro-actions">
-              <a class="btn checkout" id="checkoutBtn" href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" target="_blank" rel="noopener noreferrer">Activar Plan Pro — 19,99 €/mes</a>
+              <a class="btn checkout" id="checkoutBtn" href="https://buy.stripe.com/00wdR90kLe7j0fp9KfabK01" target="_blank" rel="noopener noreferrer">Activar Plan Pro web — 19,99 €/mes</a>
               <a class="btn assist" id="assistantsBtn" href="/asistentes">Ver asistentes incluidos</a>
             </div>
           </div>
@@ -187,8 +187,8 @@
 
     function updateLimit() {
       if (localStorage.getItem(DEMO_KEY) === '1') {
-        createBtn.textContent = 'Demo usada · Activar Plan Pro';
-        limitText.textContent = 'Ya has usado tu demo gratuita. Puedes revisar tu Jarvis o activar el Plan Pro para desbloquear el sistema completo.';
+        createBtn.textContent = 'Demo usada · Consultar Plan Pro';
+        limitText.textContent = 'Ya has usado tu demo gratuita. Puedes revisar tu Jarvis o consultar el Plan Pro web con activación asistida.';
       }
     }
 
@@ -250,7 +250,7 @@
     createBtn.addEventListener('click', renderJarvis);
     document.getElementById('checkoutBtn').addEventListener('click', () => {
       track('begin_checkout', {
-        cta_text: 'Activar Plan Pro — 19,99 €/mes',
+        cta_text: 'Activar Plan Pro web — 19,99 €/mes',
         cta_location: 'demo_result',
         product_name: 'Plan Pro',
         value: 19.99,
@@ -266,5 +266,6 @@
     track('demo_start', { cta_location: 'page_load' });
     updateLimit();
   </script>
+  <script src="/play-billing-guard.js"></script>
 </body>
 </html>
