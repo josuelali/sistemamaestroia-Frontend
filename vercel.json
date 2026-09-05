@@ -3,10 +3,6 @@
     {
       "source": "/api/:path*",
       "destination": "https://systema-maestro-backend.onrender.com/api/:path*"
-    },
-    {
-      "source": "/",
-      "destination": "/panel.html"
     }
   ]
 }
