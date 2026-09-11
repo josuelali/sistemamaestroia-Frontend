@@ -208,20 +208,63 @@
       cursor: wait;
     }
 
-    .result {
-      display: none;
-      margin-top: 22px;
-      padding: 20px;
-      border-radius: 18px;
-      background: rgba(0,0,0,.28);
-      border: 1px solid rgba(255,255,255,.1);
-      white-space: pre-wrap;
-      line-height: 1.6;
-      color: #e8eef7;
+    .result { display:none; margin-top:24px; color:#e8eef7; }
+    .result.active { display:block; animation:resultIn .38s ease both; }
+    @keyframes resultIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+    .ai-response { position:relative; overflow:hidden; border:1px solid rgba(114,214,255,.28); border-radius:22px; background:linear-gradient(145deg,rgba(7,17,32,.98),rgba(3,8,17,.98)); box-shadow:0 18px 55px rgba(0,0,0,.35),0 0 35px rgba(65,168,255,.08); }
+    .ai-response::before { content:""; position:absolute; inset:0 0 auto; height:2px; background:linear-gradient(90deg,transparent,#72d6ff,#5b8cff,transparent); }
+    .ai-response-head { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:17px 20px; border-bottom:1px solid rgba(255,255,255,.08); background:rgba(114,214,255,.035); }
+    .ai-response-agent { display:flex; align-items:center; gap:11px; min-width:0; }
+    .ai-response-icon { width:38px; height:38px; flex:0 0 38px; display:grid; place-items:center; border-radius:12px; background:linear-gradient(145deg,rgba(114,214,255,.18),rgba(91,140,255,.08)); border:1px solid rgba(114,214,255,.22); }
+    .ai-response-name { font-size:14px; font-weight:850; color:#fff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ai-response-status { margin-top:3px; color:#75d9ff; font-size:10px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .ai-copy { border:1px solid rgba(114,214,255,.22); background:rgba(114,214,255,.07); color:#cceeff; border-radius:11px; padding:9px 12px; font:inherit; font-size:12px; font-weight:750; cursor:pointer; transition:.2s ease; }
+    .ai-copy:hover { background:rgba(114,214,255,.14); border-color:rgba(114,214,255,.45); }
+    .ai-response-body { padding:22px 22px 24px; font-size:15px; line-height:1.72; overflow-wrap:anywhere; }
+    .ai-response-body h2,.ai-response-body h3,.ai-response-body h4 { color:#fff; letter-spacing:-.025em; line-height:1.25; margin:1.35em 0 .55em; }
+    .ai-response-body h2:first-child,.ai-response-body h3:first-child { margin-top:0; }
+    .ai-response-body h2 { font-size:21px; } .ai-response-body h3 { font-size:17px; color:#bfe9ff; }
+    .ai-response-body p { margin:.7em 0; color:#dce7f5; }
+    .ai-response-body ul,.ai-response-body ol { margin:.7em 0; padding-left:1.45em; } .ai-response-body li { margin:.38em 0; padding-left:.18em; }
+    .ai-response-body strong { color:#fff; font-weight:800; }
+    .ai-response-body blockquote { margin:1em 0; padding:13px 15px; border-left:3px solid #72d6ff; border-radius:0 12px 12px 0; background:rgba(114,214,255,.06); color:#dff4ff; }
+    .ai-response-body code { padding:2px 6px; border-radius:6px; background:rgba(255,255,255,.08); color:#9fe4ff; font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:.9em; }
+    .ai-response-body pre { overflow:auto; margin:1em 0; padding:15px; border:1px solid rgba(114,214,255,.14); border-radius:13px; background:#02060d; } .ai-response-body pre code { padding:0; background:none; color:#c8edff; }
+    .ai-callout { margin:1em 0; padding:14px 16px; border:1px solid rgba(114,214,255,.16); border-radius:14px; background:linear-gradient(90deg,rgba(114,214,255,.08),rgba(91,140,255,.035)); }
+    .ai-callout-label { display:block; margin-bottom:5px; color:#72d6ff; font-size:10px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+    .ai-response.loading .ai-response-status { animation:pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity:.45; } }
+    .ai-response.error { border-color:rgba(255,112,112,.3); } .ai-response.error .ai-response-status { color:#ff9b9b; }
+    @media (max-width:600px) { .ai-response-head { padding:14px; } .ai-response-body { padding:18px 15px 20px; } .ai-copy { padding:8px 9px; } }
+
+
+    .demo-cta {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0 10px;
     }
 
-    .result.active {
-      display: block;
+    .demo-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .demo-cta-primary {
+      color: #06111f;
+      background: linear-gradient(90deg, #72d6ff, #9dffb3);
+    }
+
+    .demo-cta-secondary {
+      color: #e8eef7;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
     }
 
     .hub-note {
@@ -246,6 +289,12 @@
         Elige un asistente, rellena un formulario simple y genera una salida lista para usar:
         ofertas, landings, anuncios, emails, SEO, automatizaciones y validación de ideas.
       </p>
+    </section>
+
+
+    <section class="demo-cta" aria-label="Demo Jarvis">
+      <a class="demo-cta-primary" href="/demo.html">⚡ Crear mi Jarvis gratis</a>
+      <a class="demo-cta-secondary" href="/demo.html">Diseña tu Jarvis de negocio en 60 segundos</a>
     </section>
 
     <section id="grid" class="assistants-grid"></section>
@@ -403,6 +452,58 @@
       localStorage.setItem(ASSISTANTS_TRIAL_KEY, "1");
     }
 
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[ch]));
+    }
+
+    function inlineFormat(value) {
+      let text = escapeHtml(value);
+      text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+      text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      return text;
+    }
+
+    function formatAssistantOutput(raw) {
+      const lines = String(raw ?? "").replace(/\r\n/g, "\n").split("\n");
+      let html = "", list = null, code = false, codeLines = [];
+      const closeList = () => { if (list) { html += `</${list}>`; list = null; } };
+      const closeCode = () => { if (code) { html += `<pre><code>${escapeHtml(codeLines.join("\n"))}</code></pre>`; code=false; codeLines=[]; } };
+      for (const original of lines) {
+        const line = original.trimEnd();
+        if (/^```/.test(line.trim())) { if (code) closeCode(); else { closeList(); code=true; } continue; }
+        if (code) { codeLines.push(original); continue; }
+        if (!line.trim()) { closeList(); continue; }
+        let m;
+        if ((m=line.match(/^###\s+(.+)/))) { closeList(); html += `<h4>${inlineFormat(m[1])}</h4>`; continue; }
+        if ((m=line.match(/^##\s+(.+)/))) { closeList(); html += `<h3>${inlineFormat(m[1])}</h3>`; continue; }
+        if ((m=line.match(/^#\s+(.+)/))) { closeList(); html += `<h2>${inlineFormat(m[1])}</h2>`; continue; }
+        if ((m=line.match(/^>\s?(.+)/))) { closeList(); html += `<blockquote>${inlineFormat(m[1])}</blockquote>`; continue; }
+        if ((m=line.match(/^[-*]\s+(.+)/))) { if (list!=="ul") { closeList(); html+="<ul>"; list="ul"; } html += `<li>${inlineFormat(m[1])}</li>`; continue; }
+        if ((m=line.match(/^\d+[.)]\s+(.+)/))) { if (list!=="ol") { closeList(); html+="<ol>"; list="ol"; } html += `<li>${inlineFormat(m[1])}</li>`; continue; }
+        closeList();
+        const callout=line.match(/^(ACCI[ÓO]N(?: PRIORITARIA)?|RECOMENDACI[ÓO]N|RESULTADO|ALERTA|SIGUIENTE PASO)\s*:\s*(.+)$/i);
+        if (callout) { html += `<div class="ai-callout"><span class="ai-callout-label">${escapeHtml(callout[1])}</span>${inlineFormat(callout[2])}</div>`; continue; }
+        html += `<p>${inlineFormat(line)}</p>`;
+      }
+      closeList(); closeCode();
+      return html || "<p>Respuesta generada, pero sin contenido visible.</p>";
+    }
+
+    function renderResult(result, assistant, raw, state="complete") {
+      const isLoading=state==="loading", isError=state==="error";
+      const status=isLoading ? "Procesando" : isError ? "Revisión necesaria" : "Análisis completado";
+      result.dataset.rawResponse = String(raw ?? "");
+      result.className = `result active${isLoading ? "" : ""}`;
+      result.innerHTML = `<section class="ai-response ${state}">
+        <header class="ai-response-head"><div class="ai-response-agent">
+          <div class="ai-response-icon">${assistant.icon}</div><div><div class="ai-response-name">${escapeHtml(assistant.name)}</div><div class="ai-response-status">${status}</div></div>
+        </div>${isLoading ? "" : '<button type="button" class="ai-copy">Copiar respuesta</button>'}</header>
+        <div class="ai-response-body">${isLoading ? `<p>${inlineFormat(raw)}</p>` : formatAssistantOutput(raw)}</div>
+      </section>`;
+      const copy=result.querySelector(".ai-copy");
+      if (copy) copy.addEventListener("click", async () => { try { await navigator.clipboard.writeText(result.dataset.rawResponse || ""); copy.textContent="Copiado ✓"; setTimeout(()=>copy.textContent="Copiar respuesta",1500); } catch { copy.textContent="No se pudo copiar"; } });
+    }
+
     function renderAssistant(assistant) {
       panel.classList.add("active");
       panel.innerHTML = `
@@ -454,14 +555,14 @@
         result.classList.add("active");
 
         if (trialAlreadyUsed()) {
-          result.textContent = "Ya has usado tu prueba gratis de Asistentes. Puedes consultar el Plan Pro web por 19,99€/mes con activación asistida. En la app Android de Google Play no se ofrece compra directa por Stripe.";
+          renderResult(result, assistant, "Ya has usado tu prueba gratis de Asistentes. Puedes consultar el Plan Pro web por 19,99€/mes con activación asistida. En la app Android de Google Play no se ofrece compra directa por Stripe.");
           document.getElementById("resultCta").style.display = "block";
           return;
         }
 
         btn.disabled = true;
         btn.textContent = "Generando...";
-        result.textContent = "Generando respuesta con Sistema Maestro IA...";
+        renderResult(result, assistant, "Generando respuesta con Sistema Maestro IA...", "loading");
 
         try {
           const response = await fetch("/api/run", {
@@ -479,13 +580,13 @@
             throw new Error(data.detail || data.error || "Error generando respuesta");
           }
 
-          result.textContent = data.output || data.result || "Respuesta generada, pero sin contenido visible.";
+          renderResult(result, assistant, data.output || data.result || "Respuesta generada, pero sin contenido visible.");
           consumeTrial();
           document.getElementById("resultCta").style.display = "block";
         } catch (error) {
-          result.textContent =
-            "No se pudo generar todavía. Falta conectar o desplegar el endpoint backend /api/run.\\n\\nDetalle: " +
-            error.message;
+          renderResult(result, assistant,
+            "No se pudo generar todavía. Falta conectar o desplegar el endpoint backend /api/run.\n\nDetalle: " + error.message,
+            "error");
         } finally {
           btn.disabled = false;
           btn.textContent = "Generar";
