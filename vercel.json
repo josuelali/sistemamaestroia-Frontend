@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/asistentes",
+      "destination": "/asistentes.html"
+    },
+    {
+      "source": "/asistentes/:slug",
+      "destination": "/asistentes.html"
+    },
+    {
       "source": "/api/:path*",
       "destination": "https://systema-maestro-backend.onrender.com/api/:path*"
     }
