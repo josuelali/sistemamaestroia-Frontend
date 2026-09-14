@@ -9,19 +9,12 @@
 <link rel="manifest" href="/manifest.webmanifest">
 <meta name="theme-color" content="#060B1A">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<script src="/analytics-consent.js" defer></script>
 <style>
 .gracias-container{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:left;padding:40px 20px;background:linear-gradient(180deg,#060b1f,#050814)}
 .gracias-box{max-width:720px;background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.09);border-radius:22px;padding:40px;backdrop-filter:blur(10px);box-shadow:0 24px 70px rgba(0,0,0,.28)}
 .gracias-box h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.05;margin:0 0 20px;letter-spacing:-.04em}.gracias-box h2{font-size:1.25rem;margin:28px 0 10px}.gracias-box p,.gracias-box li{opacity:0.86;line-height:1.65}.gracias-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}.gracias-btn{display:inline-block;padding:13px 18px;border-radius:12px;background:linear-gradient(90deg,#4facfe,#9f5cff);color:white;font-weight:700;text-decoration:none;transition:0.3s}.gracias-btn.secondary{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}.notice{padding:16px 18px;border-left:4px solid #72d6ff;border-radius:14px;background:rgba(114,214,255,.09);margin:18px 0}.small{font-size:.92rem;opacity:.72}
 </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-3CT444VHQ4');
-</script>
 </head>
 <body>
 <div class="gracias-container">
@@ -59,13 +52,15 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 <script>
-  if (typeof gtag === 'function') {
-    gtag('event', 'pro_thank_you_view', {
-      asset_name: 'sistema_maestro_ia',
-      page_location: window.location.href,
-      event_note: 'thank_you_page_view_no_payment_confirmation_manual_activation'
-    });
-  }
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof window.smiaTrack === 'function') {
+      window.smiaTrack('pro_thank_you_view', {
+        asset_name: 'sistema_maestro_ia',
+        page_location: window.location.href,
+        event_note: 'thank_you_page_view_no_payment_confirmation_manual_activation'
+      });
+    }
+  });
 </script>
 </body>
 </html>
