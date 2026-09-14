@@ -1,4 +1,31 @@
 {
+  "redirects": [
+    {
+      "source": "/go/youtube",
+      "destination": "/?utm_source=youtube&utm_medium=social&utm_campaign=smia_2026&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/go/tiktok",
+      "destination": "/?utm_source=tiktok&utm_medium=social&utm_campaign=smia_2026&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/go/instagram",
+      "destination": "/?utm_source=instagram&utm_medium=social&utm_campaign=smia_2026&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/go/facebook",
+      "destination": "/?utm_source=facebook&utm_medium=social&utm_campaign=smia_2026&utm_content=profile",
+      "permanent": false
+    },
+    {
+      "source": "/go/linkedin",
+      "destination": "/?utm_source=linkedin&utm_medium=social&utm_campaign=smia_2026&utm_content=profile",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/asistentes",
