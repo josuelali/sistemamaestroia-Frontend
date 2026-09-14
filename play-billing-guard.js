@@ -1,4 +1,11 @@
 (function () {
+  if (!document.querySelector('script[src="/analytics-consent.js"]')) {
+    var analyticsScript = document.createElement('script');
+    analyticsScript.src = '/analytics-consent.js';
+    analyticsScript.defer = true;
+    document.head.appendChild(analyticsScript);
+  }
+
   function isAndroidAppContext() {
     var ua = navigator.userAgent || "";
     var params = new URLSearchParams(window.location.search || "");
