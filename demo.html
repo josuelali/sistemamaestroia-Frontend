@@ -7,15 +7,7 @@
   <meta name="description" content="Demo pública de Sistema Maestro IA: crea el borrador de tu Jarvis de negocio en 60 segundos." />
   <link rel="icon" href="/favicon.ico" sizes="any">
   <link rel="manifest" href="/manifest.webmanifest">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CT444VHQ4"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3CT444VHQ4');
-  </script>
+  <script src="/analytics-consent.js" defer></script>
 
   <style>
     :root{
@@ -165,8 +157,8 @@
     let formStarted = false;
 
     function track(eventName, params = {}) {
-      if (typeof gtag === 'function') {
-        gtag('event', eventName, {
+      if (typeof window.smiaTrack === 'function') {
+        window.smiaTrack(eventName, {
           asset_name: 'sistema_maestro_ia',
           demo_type: 'jarvis_business_demo',
           page_url: window.location.href,
